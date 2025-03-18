@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.35.1">
+    <meta name="project" content="Plausible v0.0.1">
+
+
+    <title>Plausible.Exports — Plausible v0.0.1</title>
+    <link rel="stylesheet" href="dist/html-elixir-P45HOAC7.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-K7URE6B4.js"></script>
+    <script src="dist/sidebar_items-648A9919.js"></script>
+    <script src="docs_config.js"></script>
+    <script async src="dist/html-PVRIOB7F.js"></script>
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="readme.html" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Plausible" />
+        </a>
+
+      <div>
+        <a href="readme.html" class="sidebar-projectName" translate="no">
+Plausible
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.0.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Plausible</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
+          </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+    <span translate="no">Plausible.Exports</span> 
+    <small class="app-vsn" translate="no">(Plausible v0.0.1)</small>
+
+  </h1>
+
+
+    <section id="moduledoc">
+<p>Contains functions to export data for events and sessions as Zip archives.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-types summary">
+  <h2>
+    <a href="#types">Types</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:export/0" data-no-tooltip translate="no">export()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#archive_filename/2" data-no-tooltip translate="no">archive_filename(domain, created_on)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Renders export archive filename.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#content_disposition/1" data-no-tooltip translate="no">content_disposition(filename)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Safely renders content disposition for an arbitrary export filename.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#date_range/2" data-no-tooltip translate="no">date_range(site_id, timezone)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns the date range for the site's events data in site's timezone or <code class="inline">nil</code> if there is no data</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#delete_local_export/1" data-no-tooltip translate="no">delete_local_export(site_id)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Deletes local export for a site</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#delete_s3_export!/1" data-no-tooltip translate="no">delete_s3_export!(site_id)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Deletes S3 export for a site. Raises if object storage is unavailable.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#export_queries/3" data-no-tooltip translate="no">export_queries(site_id, current_user_id, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds Ecto queries to export data from <code class="inline">events_v2</code> and <code class="inline">sessions_v2</code>
+tables into the format of <code class="inline">imported_*</code> tables for a website.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get_last_export_job/1" data-no-tooltip translate="no">get_last_export_job(site_id)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Gets last CSV export job for a site</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get_local_export/3" data-no-tooltip translate="no">get_local_export(site_id, domain, timezone)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Gets local export for a site</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get_s3_export!/2" data-no-tooltip translate="no">get_s3_export!(site_id, retries \\ 0)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Gets S3 export for a site. Raises if object storage is unavailable.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#oban_listen/0" data-no-tooltip translate="no">oban_listen()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Subscribes to CSV export job notifications</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#schedule_local_export/2" data-no-tooltip translate="no">schedule_local_export(site_id, email_to)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Schedules CSV export job to local storage</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#schedule_s3_export/3" data-no-tooltip translate="no">schedule_s3_export(site_id, current_user_id, email_to)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Schedules CSV export job to S3 storage</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#stream_archive/3" data-no-tooltip translate="no">stream_archive(conn, named_queries, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Creates a streamable Zip archive from the provided (named) Ecto queries.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:export/0">
+
+  <div class="detail-header">
+    <a href="#t:export/0" class="detail-link" data-no-tooltip aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">export()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L100" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> export() :: %{
+  path: <a href="https://hexdocs.pm/elixir/Path.html#t:t/0">Path.t</a>(),
+  name: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  expires_at: <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>() | nil,
+  size: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()
+}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="archive_filename/2">
+
+  <div class="detail-header">
+    <a href="#archive_filename/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">archive_filename(domain, created_on)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L74" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Renders export archive filename.</p><p>Examples:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">archive_filename</span><span class="p" data-group-id="0315741481-1">(</span><span class="s">&quot;plausible.io&quot;</span><span class="p">,</span><span class="w"> </span><span class="c">_created_on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ld">~D[2024-12-31]</span><span class="p" data-group-id="0315741481-1">)</span><span class="w">
+</span><span class="s">&quot;plausible_io_20241231.zip&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="content_disposition/1">
+
+  <div class="detail-header">
+    <a href="#content_disposition/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">content_disposition(filename)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L90" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Safely renders content disposition for an arbitrary export filename.</p><p>Examples:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">content_disposition</span><span class="p" data-group-id="3687455365-1">(</span><span class="s">&quot;plausible_io_20241231.zip&quot;</span><span class="p" data-group-id="3687455365-1">)</span><span class="w">
+</span><span class="s">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="s">plausible_io_20241231.zip</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">content_disposition</span><span class="p" data-group-id="3687455365-2">(</span><span class="s">&quot;📊.zip&quot;</span><span class="p" data-group-id="3687455365-2">)</span><span class="w">
+</span><span class="s">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="s">plausible-export.zip</span><span class="se">\&quot;</span><span class="s">; filename*=utf-8&#39;&#39;%F0%9F%93%8A.zip&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="date_range/2">
+
+  <div class="detail-header">
+    <a href="#date_range/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">date_range(site_id, timezone)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L192" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> date_range(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/Date.Range.html#t:t/0">Date.Range.t</a>() | nil</pre>
+
+      </div>
+
+<p>Returns the date range for the site's events data in site's timezone or <code class="inline">nil</code> if there is no data</p>
+  </section>
+</section>
+<section class="detail" id="delete_local_export/1">
+
+  <div class="detail-header">
+    <a href="#delete_local_export/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">delete_local_export(site_id)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L124" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> delete_local_export(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Deletes local export for a site</p>
+  </section>
+</section>
+<section class="detail" id="delete_s3_export!/1">
+
+  <div class="detail-header">
+    <a href="#delete_s3_export!/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">delete_s3_export!(site_id)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L178" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> delete_s3_export!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Deletes S3 export for a site. Raises if object storage is unavailable.</p>
+  </section>
+</section>
+<section class="detail" id="export_queries/3">
+
+    <span id="export_queries/2"></span>
+
+  <div class="detail-header">
+    <a href="#export_queries/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">export_queries(site_id, current_user_id, opts \\ [])</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L218" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> export_queries(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>() | nil,
+  extname: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  date_range: <a href="https://hexdocs.pm/elixir/Date.Range.html#t:t/0">Date.Range.t</a>(),
+  timezone: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+) :: %{required(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) =&gt; <a href="https://hexdocs.pm/ecto/3.12.5/Ecto.Query.html#t:t/0">Ecto.Query.t</a>()}</pre>
+
+      </div>
+
+<p>Builds Ecto queries to export data from <code class="inline">events_v2</code> and <code class="inline">sessions_v2</code>
+tables into the format of <code class="inline">imported_*</code> tables for a website.</p>
+  </section>
+</section>
+<section class="detail" id="get_last_export_job/1">
+
+  <div class="detail-header">
+    <a href="#get_last_export_job/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">get_last_export_job(site_id)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L52" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> get_last_export_job(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: <a href="https://hexdocs.pm/oban/2.19.2/Oban.Job.html#t:t/0">Oban.Job.t</a>() | nil</pre>
+
+      </div>
+
+<p>Gets last CSV export job for a site</p>
+  </section>
+</section>
+<section class="detail" id="get_local_export/3">
+
+  <div class="detail-header">
+    <a href="#get_local_export/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">get_local_export(site_id, domain, timezone)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L109" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> get_local_export(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="#t:export/0">export</a>() | nil</pre>
+
+      </div>
+
+<p>Gets local export for a site</p>
+  </section>
+</section>
+<section class="detail" id="get_s3_export!/2">
+
+    <span id="get_s3_export!/1"></span>
+
+  <div class="detail-header">
+    <a href="#get_s3_export!/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">get_s3_export!(site_id, retries \\ 0)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L142" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> get_s3_export!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()) :: <a href="#t:export/0">export</a>() | nil</pre>
+
+      </div>
+
+<p>Gets S3 export for a site. Raises if object storage is unavailable.</p>
+  </section>
+</section>
+<section class="detail" id="oban_listen/0">
+
+  <div class="detail-header">
+    <a href="#oban_listen/0" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">oban_listen()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L61" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Subscribes to CSV export job notifications</p>
+  </section>
+</section>
+<section class="detail" id="schedule_local_export/2">
+
+  <div class="detail-header">
+    <a href="#schedule_local_export/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">schedule_local_export(site_id, email_to)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L30" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> schedule_local_export(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/oban/2.19.2/Oban.Job.html#t:t/0">Oban.Job.t</a>()} | {:error, :no_data}</pre>
+
+      </div>
+
+<p>Schedules CSV export job to local storage</p>
+  </section>
+</section>
+<section class="detail" id="schedule_s3_export/3">
+
+  <div class="detail-header">
+    <a href="#schedule_s3_export/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">schedule_s3_export(site_id, current_user_id, email_to)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L13" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> schedule_s3_export(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>() | nil, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/oban/2.19.2/Oban.Job.html#t:t/0">Oban.Job.t</a>()} | {:error, :no_data}</pre>
+
+      </div>
+
+<p>Schedules CSV export job to S3 storage</p>
+  </section>
+</section>
+<section class="detail" id="stream_archive/3">
+
+    <span id="stream_archive/2"></span>
+
+  <div class="detail-header">
+    <a href="#stream_archive/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">stream_archive(conn, named_queries, opts \\ [])</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/exports.ex#L632" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> stream_archive(<a href="https://hexdocs.pm/db_connection/2.7.0/DBConnection.html#t:t/0">DBConnection.t</a>(), %{required(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) =&gt; <a href="https://hexdocs.pm/ecto/3.12.5/Ecto.Query.html#t:t/0">Ecto.Query.t</a>()}, [
+  <a href="https://hexdocs.pm/ch/0.3.2/Ch.html#t:query_option/0">Ch.query_option</a>()
+]) ::
+  <a href="https://hexdocs.pm/elixir/Enumerable.html#t:t/0">Enumerable.t</a>()</pre>
+
+      </div>
+
+<p>Creates a streamable Zip archive from the provided (named) Ecto queries.</p><p>Example usage:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="1744352346-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">pool</span><span class="p" data-group-id="1744352346-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Ch</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="1744352346-2">(</span><span class="ss">pool_size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1744352346-2">)</span><span class="w">
+
+</span><span class="nc">DBConnection</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="1744352346-3">(</span><span class="n">pool</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="1744352346-4">fn</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+  </span><span class="n">conn</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">stream_archive</span><span class="p" data-group-id="1744352346-5">(</span><span class="n">export_queries</span><span class="p" data-group-id="1744352346-6">(</span><span class="c">_site_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1744352346-6">)</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CSVWithNames&quot;</span><span class="p" data-group-id="1744352346-5">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">into</span><span class="p" data-group-id="1744352346-7">(</span><span class="nc">File</span><span class="o">.</span><span class="n">stream!</span><span class="p" data-group-id="1744352346-8">(</span><span class="s">&quot;export.zip&quot;</span><span class="p" data-group-id="1744352346-8">)</span><span class="p" data-group-id="1744352346-7">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">run</span><span class="p" data-group-id="1744352346-9">(</span><span class="p" data-group-id="1744352346-9">)</span><span class="w">
+</span><span class="k" data-group-id="1744352346-4">end</span><span class="p" data-group-id="1744352346-3">)</span></code></pre>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="Plausible.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.35.1) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad: true})</script>
+
+  </body>
+</html>

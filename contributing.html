@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.35.1">
+    <meta name="project" content="Plausible v0.0.1">
+
+
+    <title>Contributing — Plausible v0.0.1</title>
+    <link rel="stylesheet" href="dist/html-elixir-P45HOAC7.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-K7URE6B4.js"></script>
+    <script src="dist/sidebar_items-648A9919.js"></script>
+    <script src="docs_config.js"></script>
+    <script async src="dist/html-PVRIOB7F.js"></script>
+
+  </head>
+  <body data-type="extras" class="page-extra">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="readme.html" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Plausible" />
+        </a>
+
+      <div>
+        <a href="readme.html" class="sidebar-projectName" translate="no">
+Plausible
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.0.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Plausible</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
+          </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/CONTRIBUTING.md#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+
+    <span>Contributing</span>
+  </h1>
+
+<p>We welcome everyone to contribute to Plausible. This document is to help you on setting up your environment, finding a task, and opening pull requests.</p><h2 id="development-setup" class="section-heading">
+  <a href="#development-setup" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Development setup</span>
+</h2>
+<p>The easiest way to get up and running is to <a href="https://docs.docker.com/get-docker/">install</a> and use Docker for running both Postgres and Clickhouse.</p><p>Make sure Docker, Elixir, Erlang and Node.js are all installed on your development machine. The <a href="https://github.com/plausible/analytics/blob/master/.tool-versions"><code class="inline">.tool-versions</code></a> file is available to use with <a href="https://github.com/asdf-vm/asdf">asdf</a> or similar tools.</p><h3 id="start-the-environment" class="section-heading">
+  <a href="#start-the-environment" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Start the environment</span>
+</h3>
+<ol><li>Run both <code class="inline">make postgres</code> and <code class="inline">make clickhouse</code>.</li><li>You can set up everything with <code class="inline">make install</code>, alternatively run each command separately:<ol><li>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a>. This will download the required Elixir dependencies.</li><li>Run <a href="https://hexdocs.pm/ecto/3.12.5/Mix.Tasks.Ecto.Create.html"><code class="inline">mix ecto.create</code></a>. This will create the required databases in both Postgres and Clickhouse.</li><li>Run <a href="https://hexdocs.pm/ecto_sql/3.12.1/Mix.Tasks.Ecto.Migrate.html"><code class="inline">mix ecto.migrate</code></a> to build the database schema.</li><li>Run <code class="inline">mix run priv/repo/seeds.exs</code> to seed the database. Check the <a href="#Seeds">Seeds</a> section for more.</li><li>Run <code class="inline">npm ci --prefix assets</code> to install the required client-side dependencies.</li><li>Run <code class="inline">npm ci --prefix tracker</code> to install the required tracker dependencies.</li><li>Run <code class="inline">mix assets.setup</code> to install Tailwind and Esbuild</li><li>Run <code class="inline">npm run deploy --prefix tracker</code> to generate tracker files in <code class="inline">priv/tracker/js</code></li><li>Run <a href="Mix.Tasks.DownloadCountryDatabase.html"><code class="inline">mix download_country_database</code></a> to fetch geolocation database</li></ol></li><li>Run <code class="inline">make server</code> or <a href="https://hexdocs.pm/phoenix/1.7.20/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> to start the Phoenix server.</li><li>The system is now available on <code class="inline">localhost:8000</code>.</li></ol><h3 id="seeds" class="section-heading">
+  <a href="#seeds" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Seeds</span>
+</h3>
+<p>You can optionally seed your database to automatically create an account and a site with stats:</p><ol><li>Run <code class="inline">mix run priv/repo/seeds.exs</code> to seed the database.</li><li>Start the server with <code class="inline">make server</code> and navigate to <code class="inline">http://localhost:8000/login</code>.</li><li>Log in with the following e-mail and password combination: <code class="inline">user@plausible.test</code> and <code class="inline">plausible</code>.</li><li>You should now have a <code class="inline">dummy.site</code> site with generated stats.</li></ol><p>Alternatively, you can manually create a new account:</p><ol><li>Navigate to <code class="inline">http://localhost:8000/register</code> and fill in the form.</li><li>Fill in the rest of the forms and for the domain use <code class="inline">dummy.site</code></li><li>Skip the JS snippet and click start collecting data.</li><li>Run <a href="Mix.Tasks.SendPageview.html"><code class="inline">mix send_pageview</code></a> from the terminal to generate a fake pageview event for the dummy site.</li><li>You should now be all set!</li></ol><h3 id="stopping-docker-containers" class="section-heading">
+  <a href="#stopping-docker-containers" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Stopping Docker containers</span>
+</h3>
+<ol><li>Stop and remove the Postgres container with <code class="inline">make postgres-stop</code>.</li><li>Stop and remove the Clickhouse container with <code class="inline">make clickhouse-stop</code>.</li></ol><p>Volumes are preserved. You'll find that the Postgres and Clickhouse state are retained when you bring them up again the next time: no need to re-register and so on.</p><p>Note: Since we are deleting the containers, be careful when deleting volumes with <code class="inline">docker volume prune</code>. You might accidentally delete the database and would have to go through re-registration process.</p><h3 id="pre-commit-hooks" class="section-heading">
+  <a href="#pre-commit-hooks" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Pre-commit hooks</span>
+</h3>
+<p><code class="inline">pre-commit</code> requires Python to be available locally and covers Elixir, JavaScript, and CSS. Set up with <code class="inline">pip install --user pre-commit</code> followed by <code class="inline">pre-commit install</code>. Conversely, if the prompts are far too bothersome, remove with <code class="inline">pre-commit uninstall</code>.</p><h2 id="finding-a-task" class="section-heading">
+  <a href="#finding-a-task" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Finding a task</span>
+</h2>
+<p>Bugs can be found in our <a href="https://github.com/plausible/analytics/issues">issue tracker</a>. Issues are usually up for grabs.</p><p>New features need to be discussed with the core team and the community first. If you're tackling a feature, please make sure it has been already discussed in the <a href="https://github.com/plausible/analytics/discussions">Discussions tab</a>. We kindly ask contributors to use the discussion comment section to propose a solution before opening a pull request.</p><p>Pull requests without an associated issue or discussion may still be merged, but we will focus on changes that have already been talked through.</p>
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="readme.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Introduction
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="Plausible.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.35.1) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad: true})</script>
+
+  </body>
+</html>
