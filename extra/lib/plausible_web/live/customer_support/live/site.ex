@@ -2,6 +2,10 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
   @moduledoc false
   use Plausible.CustomerSupport.Resource, :component
 
+  alias PlausibleWeb.Live.Components.ComboBox
+  alias Plausible.Repo
+  import Ecto.Query
+
   def update(%{resource_id: resource_id}, socket) do
     site = Resource.Site.get(resource_id)
     changeset = Plausible.Site.crm_changeset(site, %{})
@@ -23,6 +27,13 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
       end)
 
     {:ok, assign(socket, people: people, tab: "people")}
+  end
+
+  def update(%{tab: "rescue-zone"}, %{assigns: %{site: site}} = socket) do
+    first_owner =
+      hd(Repo.preload(site, :owners).owners)
+
+    {:ok, assign(socket, tab: "rescue-zone", first_owner: first_owner)}
   end
 
   def update(_, socket) do
@@ -68,6 +79,13 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
             <.styled_link patch={"/cs/teams/team/#{@site.team.id}"}>
               {@site.team.name}
             </.styled_link>
+
+            <span
+              :if={Plausible.Teams.locked?(@site.team)}
+              class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800"
+            >
+              Locked
+            </span>
           </p>
           <p class="text-sm font-medium">
             <span :if={@site.domain_changed_from}>(previously: {@site.domain_changed_from})</span>
@@ -84,6 +102,9 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
             <.tab to="overview" tab={@tab}>Overview</.tab>
             <.tab to="people" tab={@tab}>
               People
+            </.tab>
+            <.tab to="rescue-zone" tab={@tab}>
+              Rescue Zone
             </.tab>
           </nav>
         </div>
@@ -171,6 +192,39 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
           </:tbody>
         </.table>
       </div>
+
+      <div :if={@tab == "rescue-zone"} class="mt-8">
+        <h1 class="text-xs font-semibold">Transfer Site</h1>
+        <form class="mt-4 mb-8" phx-target={@myself} phx-submit="init-transfer">
+          <.label for="inviter_email">
+            Initiate transfer as
+          </.label>
+          <.live_component
+            id="inviter_email"
+            submit_name="inviter_email"
+            class={[
+              "mb-4"
+            ]}
+            module={ComboBox}
+            suggest_fun={fn input, _ -> search_email(input) end}
+            selected={{@first_owner.email, "#{@first_owner.name} <#{@first_owner.email}>"}}
+          />
+
+          <.label for="invitee_email">
+            Send transfer invitation to
+          </.label>
+          <.live_component
+            id="invitee_email"
+            submit_name="invitee_email"
+            module={ComboBox}
+            suggest_fun={fn input, _ -> search_email(input) end}
+            creatable
+          />
+          <.button phx-target={@myself} type="submit">
+            Initiate Site Transfer
+          </.button>
+        </form>
+      </div>
     </div>
     """
   end
@@ -189,6 +243,10 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
 
         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
           Site
+        </span>
+
+        <span :if={Plausible.Teams.locked?(@resource.object.team)} class="inline-flex items-center">
+          <Heroicons.lock_closed solid class="inline stroke-2 w-4 h-4 text-red-400 mr-2" />
         </span>
       </div>
 
@@ -231,5 +289,41 @@ defmodule PlausibleWeb.CustomerSupport.Live.Site do
     Plausible.Site.Removal.run(socket.assigns.site)
 
     {:noreply, push_navigate(put_flash(socket, :success, "Site deleted"), to: "/cs")}
+  end
+
+  def handle_event("init-transfer", params, socket) do
+    inviter = Plausible.Repo.get_by!(Plausible.Auth.User, email: params["inviter_email"])
+
+    case Plausible.Teams.Invitations.InviteToSite.invite(
+           socket.assigns.site,
+           inviter,
+           params["invitee_email"],
+           :owner
+         ) do
+      {:ok, _transfer} ->
+        success(socket, "Transfer e-mail sent!")
+
+      error ->
+        failure(socket, inspect(error))
+    end
+
+    {:noreply, socket}
+  end
+
+  defp search_email(input) do
+    Repo.all(
+      from u in Plausible.Auth.User,
+        where: ilike(u.name, ^"%#{input}%") or ilike(u.email, ^"%#{input}%"),
+        limit: 20,
+        order_by: [
+          desc: fragment("?.name = ?", u, ^input),
+          desc: fragment("?.email = ?", u, ^input),
+          asc: u.name
+        ],
+        select: {u.email, u.name}
+    )
+    |> Enum.map(fn {email, name} ->
+      {email, "#{name} <#{email}>"}
+    end)
   end
 end

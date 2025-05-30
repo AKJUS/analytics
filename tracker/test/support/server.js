@@ -23,11 +23,11 @@ export function runLocalFileServer() {
 
     let code = compileFile(variant, { returnCode: true })
 
-    if (name === 'plausible-main.js') {
+    if (name === 'plausible-web.js') {
       code = code.replace('"<%= @config_js %>"', req.query.script_config)
     }
 
-    res.send(code)
+    res.type('application/javascript').send(code)
   });
 
   // A test utility - serve an image with an artificial delay

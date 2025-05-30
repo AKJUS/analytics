@@ -28,6 +28,7 @@ defmodule Plausible.Teams.Team do
     field :accept_traffic_until, :date
     field :allow_next_upgrade_override, :boolean, default: false
     field :locked, :boolean, default: false
+    field :locked_by_admin, :boolean, default: false
 
     field :setup_complete, :boolean, default: false
     field :setup_at, :naive_datetime
@@ -37,6 +38,11 @@ defmodule Plausible.Teams.Team do
 
     # Field for purely informational purposes in CRM context
     field :notes, :string
+
+    on_ee do
+      # Embed for storing team-wide policies
+      embeds_one :policy, Plausible.Teams.Policy, on_replace: :update, defaults_to_struct: true
+    end
 
     embeds_one :grace_period, Plausible.Teams.GracePeriod, on_replace: :update
 
