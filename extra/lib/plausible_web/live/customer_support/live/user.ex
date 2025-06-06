@@ -3,10 +3,30 @@ defmodule PlausibleWeb.CustomerSupport.Live.User do
   use Plausible.CustomerSupport.Resource, :component
   use PlausibleWeb.Live.Flash
 
-  def update(assigns, socket) do
-    user = socket.assigns[:user] || Resource.User.get(assigns.resource_id)
-    form = user |> Plausible.Auth.User.changeset() |> to_form()
-    {:ok, assign(socket, user: user, form: form)}
+  import Ecto.Query
+  alias Plausible.Repo
+
+  def update(%{resource_id: resource_id}, socket) do
+    user = socket.assigns[:user] || Resource.User.get(resource_id)
+
+    if is_nil(user) do
+      redirect(
+        socket,
+        to: Routes.customer_support_path(socket, :index)
+      )
+    else
+      form = user |> Plausible.Auth.User.changeset() |> to_form()
+      {:ok, assign(socket, user: user, form: form, tab: "overview", keys_count: keys_count(user))}
+    end
+  end
+
+  def update(%{tab: "keys"}, socket) do
+    keys = keys(socket.assigns.user)
+    {:ok, assign(socket, tab: "keys", keys: keys)}
+  end
+
+  def update(_, socket) do
+    {:ok, assign(socket, tab: "overview", keys_count: keys_count(socket.assigns.user))}
   end
 
   def render(assigns) do
@@ -33,9 +53,32 @@ defmodule PlausibleWeb.CustomerSupport.Live.User do
             </p>
           </div>
         </div>
+
+        <div class="mt-5 flex justify-center sm:mt-0">
+          <.input_with_clipboard
+            id="user-identifier"
+            name="user-identifier"
+            label="User Identifier"
+            value={@user.id}
+          />
+        </div>
       </div>
 
-      <div class="mt-8">
+      <div class="mt-4">
+        <div class="hidden sm:block">
+          <nav
+            class="isolate flex divide-x dark:divide-gray-900 divide-gray-200 rounded-lg shadow dark:shadow-1"
+            aria-label="Tabs"
+          >
+            <.tab to="overview" tab={@tab}>Overview</.tab>
+            <.tab to="keys" tab={@tab}>
+              API Keys ({@keys_count})
+            </.tab>
+          </nav>
+        </div>
+      </div>
+
+      <div :if={@tab == "overview"} class="mt-8">
         <.table rows={@user.team_memberships}>
           <:thead>
             <.th>Team</.th>
@@ -67,6 +110,30 @@ defmodule PlausibleWeb.CustomerSupport.Live.User do
             </.button>
           </div>
         </.form>
+      </div>
+
+      <div :if={@tab == "keys"} class="mt-8">
+        <.table rows={@keys}>
+          <:thead>
+            <.th>Team</.th>
+            <.th>Name</.th>
+            <.th>Scopes</.th>
+            <.th>Prefix</.th>
+          </:thead>
+          <:tbody :let={api_key}>
+            <.td :if={is_nil(api_key.team)}>N/A</.td>
+            <.td :if={api_key.team}>
+              <.styled_link patch={"/cs/teams/team/#{api_key.team.id}"}>
+                {api_key.team.name}
+              </.styled_link>
+            </.td>
+            <.td>{api_key.name}</.td>
+            <.td>
+              {api_key.scopes}
+            </.td>
+            <.td>{api_key.key_prefix}</.td>
+          </:tbody>
+        </.table>
       </div>
     </div>
     """
@@ -130,5 +197,23 @@ defmodule PlausibleWeb.CustomerSupport.Live.User do
         send(socket.root_pid, {:failure, inspect(changeset.errors)})
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  defp keys_query(user) do
+    from api_key in Plausible.Auth.ApiKey,
+      where: api_key.user_id == ^user.id,
+      left_join: t in Plausible.Teams.Team,
+      on: t.id == api_key.team_id,
+      distinct: true,
+      order_by: [desc: api_key.id],
+      preload: [team: t]
+  end
+
+  def keys(user) do
+    Repo.all(keys_query(user))
+  end
+
+  def keys_count(user) do
+    Repo.aggregate(keys_query(user), :count)
   end
 end
