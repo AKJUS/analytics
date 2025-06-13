@@ -88,28 +88,8 @@ defmodule PlausibleWeb.Router do
   end
 
   on_ee do
-    use Kaffy.Routes,
-      scope: "/crm",
-      pipe_through: [
-        PlausibleWeb.Plugs.NoRobots,
-        PlausibleWeb.AuthPlug,
-        PlausibleWeb.SuperAdminOnlyPlug
-      ]
-  end
-
-  on_ee do
-    scope "/crm", PlausibleWeb do
-      pipe_through :flags
-      get "/teams/team/:team_id/usage", AdminController, :usage
-      get "/auth/user/:user_id/info", AdminController, :user_info
-      get "/billing/team/:team_id/current_plan", AdminController, :current_plan
-      get "/billing/search/team-by-id/:team_id", AdminController, :team_by_id
-      post "/billing/search/team", AdminController, :team_search
-    end
-  end
-
-  on_ee do
-    scope alias: PlausibleWeb.Live, assigns: %{connect_live_socket: true} do
+    scope alias: PlausibleWeb.Live,
+          assigns: %{connect_live_socket: true, skip_plausible_tracking: true} do
       pipe_through [:browser, :csrf, :app_layout, :flags]
 
       live "/cs", CustomerSupport, :index, as: :customer_support
@@ -161,6 +141,44 @@ defmodule PlausibleWeb.Router do
     end
   end
 
+  # SSO routes
+  on_ee do
+    pipeline :sso_saml do
+      plug :accepts, ["html"]
+
+      plug PlausibleWeb.Plugs.SecureSSO
+
+      plug PlausibleWeb.Plugs.NoRobots
+
+      plug :fetch_session
+      plug :fetch_live_flash
+    end
+
+    pipeline :sso_saml_auth do
+      plug :protect_from_forgery, with: :clear_session
+    end
+
+    scope "/sso", PlausibleWeb do
+      pipe_through [PlausibleWeb.Plugs.GateSSO, :browser, :csrf]
+
+      get "/login", SSOController, :login_form
+      post "/login", SSOController, :login
+    end
+
+    scope "/sso/saml", PlausibleWeb do
+      pipe_through [PlausibleWeb.Plugs.GateSSO, :sso_saml]
+
+      scope [] do
+        pipe_through :sso_saml_auth
+
+        get "/signin/:integration_id", SSOController, :saml_signin
+      end
+
+      post "/consume/:integration_id", SSOController, :saml_consume
+      post "/csp-report", SSOController, :csp_report
+    end
+  end
+
   scope path: "/api/plugins", as: :plugins_api do
     pipeline :plugins_api_auth do
       plug(PlausibleWeb.Plugs.AuthorizePluginsAPI)
@@ -205,6 +223,9 @@ defmodule PlausibleWeb.Router do
 
       put("/custom_props", CustomProps, :enable)
       delete("/custom_props", CustomProps, :disable)
+
+      get("/tracker_script_configuration", TrackerScriptConfiguration, :get)
+      put("/tracker_script_configuration", TrackerScriptConfiguration, :update)
     end
   end
 
@@ -432,6 +453,11 @@ defmodule PlausibleWeb.Router do
 
     get "/team/general", SettingsController, :team_general
     post "/team/general/name", SettingsController, :update_team_name
+
+    on_ee do
+      get "/sso/general", SSOController, :sso_settings
+    end
+
     post "/team/invitations/:invitation_id/accept", InvitationController, :accept_invitation
     post "/team/invitations/:invitation_id/reject", InvitationController, :reject_invitation
     delete "/team/invitations/:invitation_id", InvitationController, :remove_team_invitation

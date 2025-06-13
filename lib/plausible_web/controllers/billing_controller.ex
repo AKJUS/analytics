@@ -20,7 +20,7 @@ defmodule PlausibleWeb.BillingController do
     team = conn.assigns.current_team
 
     {live_module, hide_header?} =
-      if FunWithFlags.enabled?(:starter_tier, for: conn.assigns.current_user) do
+      if Plausible.Teams.Billing.show_new_upgrade_page?(team) do
         {PlausibleWeb.Live.ChoosePlan, true}
       else
         {PlausibleWeb.Live.LegacyChoosePlan, false}
@@ -78,7 +78,7 @@ defmodule PlausibleWeb.BillingController do
   end
 
   def upgrade_success(conn, _params) do
-    render(conn, "upgrade_success.html")
+    render(conn, "upgrade_success.html", disable_global_notices?: true)
   end
 
   def change_plan_preview(conn, %{"plan_id" => new_plan_id}) do

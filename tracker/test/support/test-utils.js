@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test"
 import packageJson from '../../package.json' with { type: 'json' }
+import { mockManyRequests } from "./mock-many-requests"
 
 export const tracker_script_version = packageJson.tracker_script_version
 
@@ -25,30 +26,6 @@ export const metaKey = function() {
   }
 }
 
-// Mocks a specified number of HTTP requests with given path. Returns a promise that resolves to a
-// list of requests as soon as the specified number of requests is made, or 3 seconds has passed.
-export const mockManyRequests = function({ page, path, numberOfRequests, responseDelay, shouldIgnoreRequest, mockRequestTimeout = 3000 }) {
-  return new Promise((resolve, _reject) => {
-    let requestList = []
-    const requestTimeoutTimer = setTimeout(() => resolve(requestList), mockRequestTimeout)
-
-    page.route(path, async (route, request) => {
-      const postData = request.postDataJSON()
-      if (!shouldIgnoreRequest || !shouldIgnoreRequest(postData)) {
-        requestList.push(postData)
-      }
-      if (responseDelay) {
-        await delay(responseDelay)
-      }
-      if (requestList.length === numberOfRequests) {
-        clearTimeout(requestTimeoutTimer)
-        resolve(requestList)
-      }
-      return route.fulfill({ status: 202, contentType: 'text/plain', body: 'ok' })
-    })
-  })
-}
-
 /**
  * A powerful utility function that makes it easy to assert on the event
  * requests that should or should not have been made after doing a page
@@ -72,8 +49,10 @@ export const mockManyRequests = function({ page, path, numberOfRequests, respons
  *  is `expectedRequests.length + refutedRequests.length`.
  * @param {number} [args.expectedRequestCount] - When provided, expects the total amount of
  *  event requests made to match this number.
+ * @param {Array|Function} [args.shouldIgnoreRequest] - When provided, ignores certain requests
  * @param {number} [args.responseDelay] - When provided, delays the response from the Plausible
  *  API by the given number of milliseconds.
+ *  @param {Function} [args.mockRequestTimeout] - How long to wait for the requests to be made
  */
 export const expectPlausibleInAction = async function (page, {
   action,
@@ -89,7 +68,7 @@ export const expectPlausibleInAction = async function (page, {
   const requestsToExpect = expectedRequestCount ? expectedRequestCount : expectedRequests.length
   const requestsToAwait = awaitedRequestCount ? awaitedRequestCount : requestsToExpect + refutedRequests.length
 
-  const plausibleRequestMockList = mockManyRequests({
+  const getRequestList = await mockManyRequests({
     page,
     path: pathToMock,
     responseDelay,
@@ -98,7 +77,7 @@ export const expectPlausibleInAction = async function (page, {
     mockRequestTimeout: mockRequestTimeout
   })
   await action()
-  const requestBodies = await plausibleRequestMockList
+  const requestBodies = await getRequestList()
 
   const expectedButNotFoundBodySubsets = []
 
@@ -126,17 +105,18 @@ export const expectPlausibleInAction = async function (page, {
   const refutedBodySubsetsErrorMessage = `The following requests were made, but were not expected:\n\n${JSON.stringify(refutedButFoundRequestBodies, null, 4)}`
   expect(refutedButFoundRequestBodies, refutedBodySubsetsErrorMessage).toHaveLength(0)
 
-  expect(requestBodies.length).toBe(requestsToExpect)
+  const unexpectedRequestBodiesErrorMessage = `Expected ${requestsToExpect} requests, but received ${requestBodies.length}:\n\n${JSON.stringify(requestBodies, null, 4)}`
+  expect(requestBodies.length, unexpectedRequestBodiesErrorMessage).toBe(requestsToExpect)
 
   return requestBodies
 }
 
-export const ignoreEngagementRequests = function(requestPostData) {
-  return requestPostData.n === 'engagement'
+export const isPageviewEvent = function(requestPostData) {
+  return requestPostData.n === 'pageview'
 }
 
-export const ignorePageleaveRequests = function(requestPostData) {
-  return requestPostData.n === 'pageleave'
+export const isEngagementEvent = function(requestPostData) {
+  return requestPostData.n === 'engagement'
 }
 
 async function toggleTabVisibility(page, hide) {

@@ -4,7 +4,7 @@ defmodule PlausibleWeb.Components.Billing.PlanBox do
   use PlausibleWeb, :component
 
   require Plausible.Billing.Subscription.Status
-  alias PlausibleWeb.Components.Billing.{PlanBenefits, Notice}
+  alias PlausibleWeb.Components.Billing.{PlanBenefits}
   alias Plausible.Billing.{Plan, Quota, Subscription}
 
   @plan_box_price_container_class "relative h-20 pt-4 max-h-20 whitespace-nowrap overflow-hidden"
@@ -51,11 +51,7 @@ defmodule PlausibleWeb.Components.Billing.PlanBox do
           <.contact_button class="bg-indigo-600 hover:bg-indigo-500 text-white" />
         <% end %>
       </div>
-      <%= if @owned && @kind == :growth && @plan_to_render.generation < 5 do %>
-        <Notice.growth_grandfathered />
-      <% else %>
-        <PlanBenefits.render benefits={@benefits} class="text-gray-600 dark:text-gray-100" />
-      <% end %>
+      <PlanBenefits.render benefits={@benefits} class="text-gray-600 dark:text-gray-100" />
     </div>
     """
   end
@@ -126,7 +122,10 @@ defmodule PlausibleWeb.Components.Billing.PlanBox do
   defp render_price_info(assigns) do
     ~H"""
     <.price_tag kind={@kind} selected_interval={@selected_interval} plan_to_render={@plan_to_render} />
-    <div id={"#{@kind}-vat-notice"} class="absolute top-5 right-0 text-xs text-gray-500">
+    <div
+      id={"#{@kind}-vat-notice"}
+      class="absolute top-[32px] sm:top-[29px] md:top-[32px] lg:top-[29px] xl:top-[32px] right-0 text-xs text-gray-500"
+    >
       + VAT
       <span class="hidden sm:inline lg:hidden xl:inline">
         if applicable
@@ -288,18 +287,22 @@ defmodule PlausibleWeb.Components.Billing.PlanBox do
         Upgrade
       </PlausibleWeb.Components.Billing.paddle_button>
     <% end %>
-    <.tooltip :if={@exceeded_plan_limits != [] && @disabled_message}>
-      <div class="absolute top-0 text-sm w-full flex items-center text-red-700 dark:text-red-500 justify-center">
-        {@disabled_message}
-        <Heroicons.information_circle class="hidden sm:block w-5 h-5 sm:ml-2" />
-      </div>
-      <:tooltip_content>
-        Your usage exceeds the following limit(s):<br /><br />
-        <p :for={limit <- @exceeded_plan_limits}>
-          {Phoenix.Naming.humanize(limit)}<br />
-        </p>
-      </:tooltip_content>
-    </.tooltip>
+    <div :if={@exceeded_plan_limits != [] && @disabled_message} class="flex flex-col items-center">
+      <.tooltip>
+        <div class="h-0 text-sm">
+          <div class="flex items-center text-red-700 dark:text-red-500 justify-center">
+            {@disabled_message}
+            <Heroicons.information_circle class="hidden sm:block w-5 h-5 sm:ml-2" />
+          </div>
+        </div>
+        <:tooltip_content>
+          Your usage exceeds the following limit(s):<br /><br />
+          <p :for={limit <- @exceeded_plan_limits}>
+            {Phoenix.Naming.humanize(limit)}<br />
+          </p>
+        </:tooltip_content>
+      </.tooltip>
+    </div>
     <div
       :if={@disabled_message && @exceeded_plan_limits == []}
       class="pt-2 text-sm w-full text-red-700 dark:text-red-500 text-center"

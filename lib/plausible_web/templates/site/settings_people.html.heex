@@ -1,13 +1,17 @@
 <.settings_tiles>
-  <PlausibleWeb.Team.Notice.owner_cta_banner :if={
-    @site_role == :owner and not Plausible.Teams.setup?(@site.team)
-  } />
+  <%= if not Plausible.Teams.setup?(@site.team) and not Plausible.Teams.Billing.solo?(@site.team) do %>
+    <PlausibleWeb.Team.Notice.owner_cta_banner :if={@site_role == :owner} />
+    <PlausibleWeb.Team.Notice.guest_cta_banner :if={@site_role != :owner} />
+  <% end %>
 
-  <PlausibleWeb.Team.Notice.guest_cta_banner :if={
-    @site_role != :owner and not Plausible.Teams.setup?(@site.team)
-  } />
-
-  <.tile docs="users-roles">
+  <.tile
+    docs="users-roles"
+    feature_mod={Plausible.Billing.Feature.Teams}
+    site={@site}
+    current_role={@site_role}
+    current_team={@site_team}
+    conn={@conn}
+  >
     <:title>People</:title>
     <:subtitle>Invite your friends or coworkers</:subtitle>
 
@@ -44,13 +48,6 @@
                   <span class="text-gray-500 dark:text-gray-400">
                     {membership.user.email}
                   </span>
-                  <.styled_link
-                    :if={ee?() and Plausible.Auth.is_super_admin?(@current_user)}
-                    new_tab={true}
-                    href={PlausibleWeb.Endpoint.url() <> "/crm/auth/user/#{membership.user.id}"}
-                  >
-                    CRM
-                  </.styled_link>
                 </p>
               </div>
 

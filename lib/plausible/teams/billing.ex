@@ -6,14 +6,13 @@ defmodule Plausible.Teams.Billing do
   import Ecto.Query
 
   alias Plausible.Billing.EnterprisePlan
-  alias Plausible.Billing.Plans
   alias Plausible.Billing.Subscription
   alias Plausible.Billing.Subscriptions
   alias Plausible.Repo
   alias Plausible.Teams
 
   alias Plausible.Billing.{EnterprisePlan, Feature, Plan, Plans, Quota}
-  alias Plausible.Billing.Feature.{Goals, Props, SitesAPI, StatsAPI}
+  alias Plausible.Billing.Feature.{Goals, Props, SitesAPI, StatsAPI, SharedLinks}
 
   require Plausible.Billing.Subscription.Status
 
@@ -21,6 +20,42 @@ defmodule Plausible.Teams.Billing do
 
   @typep last_30_days_usage() :: %{:last_30_days => Quota.usage_cycle()}
   @typep monthly_pageview_usage() :: Quota.cycles_usage() | last_30_days_usage()
+
+  @starter_tier_launch ~D[2025-06-11]
+  def starter_tier_launch(), do: @starter_tier_launch
+
+  def show_new_upgrade_page?(nil = _team) do
+    FunWithFlags.enabled?(:starter_tier)
+  end
+
+  def show_new_upgrade_page?(%Teams.Team{} = team) do
+    team = Teams.with_subscription(team)
+    feature_flag_enabled? = FunWithFlags.enabled?(:starter_tier, for: team)
+
+    subscription_plan = Plans.get_subscription_plan(team.subscription)
+
+    case {subscription_plan, team.trial_expiry_date} do
+      {%Plan{generation: 5}, _} ->
+        true
+
+      {nil, nil} ->
+        feature_flag_enabled?
+
+      {nil, trial_expiry_date} ->
+        diff = Date.diff(@starter_tier_launch, trial_expiry_date)
+        # Active or recently (less than 10 days ago) ended trials
+        # should be able to subscribe to the plans they saw when
+        # they signed up.
+        if diff <= 10 and diff >= -30 do
+          false
+        else
+          feature_flag_enabled?
+        end
+
+      {_, _} ->
+        feature_flag_enabled?
+    end
+  end
 
   def grandfathered_team?(nil), do: false
 
@@ -235,8 +270,16 @@ defmodule Plausible.Teams.Billing do
         nil -> @team_member_limit_for_trials
       end
     end
+
+    def solo?(nil), do: true
+
+    def solo?(team) do
+      team_member_limit(team) == 0
+    end
   else
     def team_member_limit(_team), do: :unlimited
+
+    def solo?(_team), do: false
   end
 
   @doc """
@@ -470,84 +513,88 @@ defmodule Plausible.Teams.Billing do
   """
   def features_usage(team, site_ids \\ nil)
 
-  def features_usage(nil, nil), do: []
+  on_ee do
+    def features_usage(nil, nil), do: []
 
-  def features_usage(%Teams.Team{} = team, nil) do
-    owned_site_ids = Teams.owned_sites_ids(team)
-    features_usage(team, owned_site_ids)
-  end
+    def features_usage(%Teams.Team{} = team, nil) do
+      owned_site_ids = Teams.owned_sites_ids(team)
+      features_usage(team, owned_site_ids)
+    end
 
-  def features_usage(%Teams.Team{} = team, owned_site_ids) when is_list(owned_site_ids) do
-    site_scoped_feature_usage = features_usage(nil, owned_site_ids)
+    def features_usage(%Teams.Team{} = team, owned_site_ids) when is_list(owned_site_ids) do
+      site_scoped_feature_usage = features_usage(nil, owned_site_ids)
 
-    stats_api_used? =
-      Repo.exists?(
-        from tm in Plausible.Teams.Membership,
-          as: :team_membership,
-          where: tm.team_id == ^team.id,
-          where:
-            exists(
-              from ak in Plausible.Auth.ApiKey,
-                where: ak.user_id == parent_as(:team_membership).user_id
-            )
-      )
+      stats_api_used? =
+        Repo.exists?(
+          from tm in Plausible.Teams.Membership,
+            as: :team_membership,
+            where: tm.team_id == ^team.id,
+            where:
+              exists(
+                from ak in Plausible.Auth.ApiKey,
+                  where: ak.user_id == parent_as(:team_membership).user_id
+              )
+        )
 
-    site_scoped_feature_usage =
-      if stats_api_used? do
-        site_scoped_feature_usage ++ [Feature.StatsAPI]
+      site_scoped_feature_usage =
+        if stats_api_used? do
+          site_scoped_feature_usage ++ [Feature.StatsAPI]
+        else
+          site_scoped_feature_usage
+        end
+
+      sites_api_used? =
+        Repo.exists?(
+          from tm in Plausible.Teams.Membership,
+            as: :team_membership,
+            where: tm.team_id == ^team.id,
+            where:
+              exists(
+                from ak in Plausible.Auth.ApiKey,
+                  where: ak.user_id == parent_as(:team_membership).user_id,
+                  where: "sites:provision:*" in ak.scopes
+              )
+        )
+
+      if sites_api_used? do
+        site_scoped_feature_usage ++ [SitesAPI]
       else
         site_scoped_feature_usage
       end
-
-    sites_api_used? =
-      Repo.exists?(
-        from tm in Plausible.Teams.Membership,
-          as: :team_membership,
-          where: tm.team_id == ^team.id,
-          where:
-            exists(
-              from ak in Plausible.Auth.ApiKey,
-                where: ak.user_id == parent_as(:team_membership).user_id,
-                where: "sites:provision:*" in ak.scopes
-            )
-      )
-
-    if sites_api_used? do
-      site_scoped_feature_usage ++ [SitesAPI]
-    else
-      site_scoped_feature_usage
     end
-  end
 
-  def features_usage(nil, site_ids) when is_list(site_ids) do
-    props_usage_q =
-      from s in Plausible.Site,
-        where: s.id in ^site_ids and fragment("cardinality(?) > 0", s.allowed_event_props)
+    def features_usage(nil, site_ids) when is_list(site_ids) do
+      shared_links_usage_q =
+        from l in Plausible.Site.SharedLink,
+          where:
+            l.site_id in ^site_ids and l.name not in ^Plausible.Sites.shared_link_special_names()
 
-    revenue_goals_usage_q =
-      from g in Plausible.Goal,
-        where: g.site_id in ^site_ids and not is_nil(g.currency)
+      props_usage_q =
+        from s in Plausible.Site,
+          where: s.id in ^site_ids and fragment("cardinality(?) > 0", s.allowed_event_props)
 
-    queries =
-      on_ee do
-        funnels_usage_q = from f in "funnels", where: f.site_id in ^site_ids
+      funnels_usage_q = from f in "funnels", where: f.site_id in ^site_ids
 
-        [
-          {Feature.Props, props_usage_q},
-          {Feature.Funnels, funnels_usage_q},
-          {Feature.RevenueGoals, revenue_goals_usage_q},
-          {Feature.SiteSegments, Plausible.Segments.get_site_segments_usage_query(site_ids)}
-        ]
-      else
-        [
-          {Feature.Props, props_usage_q},
-          {Feature.RevenueGoals, revenue_goals_usage_q}
-        ]
-      end
+      revenue_goals_usage_q =
+        from g in Plausible.Goal,
+          where: g.site_id in ^site_ids and not is_nil(g.currency)
 
-    Enum.reduce(queries, [], fn {feature, query}, acc ->
-      if Repo.exists?(query), do: acc ++ [feature], else: acc
-    end)
+      site_segments_usage_q =
+        from s in Plausible.Segments.Segment, where: s.site_id in ^site_ids and s.type == :site
+
+      [
+        {Feature.SharedLinks, shared_links_usage_q},
+        {Feature.Props, props_usage_q},
+        {Feature.Funnels, funnels_usage_q},
+        {Feature.RevenueGoals, revenue_goals_usage_q},
+        {Feature.SiteSegments, site_segments_usage_q}
+      ]
+      |> Enum.reduce([], fn {feature, query}, acc ->
+        if Repo.exists?(query), do: acc ++ [feature], else: acc
+      end)
+    end
+  else
+    def features_usage(_team, _site_ids), do: []
   end
 
   defp query_team_member_emails(team, pending_ownership_site_ids, exclude_emails) do
@@ -611,7 +658,7 @@ defmodule Plausible.Teams.Billing do
         features
 
       :free_10k ->
-        [Goals, Props, StatsAPI]
+        [Goals, Props, StatsAPI, SharedLinks]
 
       nil ->
         if Teams.on_trial?(team) do

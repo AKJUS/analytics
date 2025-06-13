@@ -173,7 +173,7 @@ defmodule PlausibleWeb.StatsControllerTest do
       locked_site.team |> Ecto.Changeset.change(locked: true) |> Repo.update!()
       conn = get(conn, "/" <> locked_site.domain)
       resp = html_response(conn, 200)
-      assert resp =~ "Dashboard locked"
+      assert resp =~ "Dashboard Locked"
       assert resp =~ "Please subscribe to the appropriate tier with the link below"
     end
 
@@ -185,7 +185,7 @@ defmodule PlausibleWeb.StatsControllerTest do
 
       conn = get(conn, "/" <> locked_site.domain)
       resp = html_response(conn, 200)
-      assert resp =~ "Dashboard locked"
+      assert resp =~ "Dashboard Locked"
       assert resp =~ "Please subscribe to the appropriate tier with the link below"
     end
 
@@ -197,7 +197,7 @@ defmodule PlausibleWeb.StatsControllerTest do
 
       conn = get(conn, "/" <> locked_site.domain)
       resp = html_response(conn, 200)
-      assert resp =~ "Dashboard locked"
+      assert resp =~ "Dashboard Locked"
       refute resp =~ "Please subscribe to the appropriate tier with the link below"
       assert resp =~ "Owner of this site must upgrade their subscription plan"
     end
@@ -207,7 +207,7 @@ defmodule PlausibleWeb.StatsControllerTest do
       locked_site.team |> Ecto.Changeset.change(locked: true) |> Repo.update!()
       conn = get(build_conn(), "/" <> locked_site.domain)
       resp = html_response(conn, 200)
-      assert resp =~ "Dashboard locked"
+      assert resp =~ "Dashboard Locked"
       assert resp =~ "You can check back later or contact the site owner"
     end
 
@@ -219,7 +219,7 @@ defmodule PlausibleWeb.StatsControllerTest do
 
     test "does not show CRM link to the site", %{conn: conn, site: site} do
       conn = get(conn, conn |> get("/" <> site.domain) |> redirected_to())
-      refute html_response(conn, 200) =~ "/crm/sites/site/#{site.id}"
+      refute html_response(conn, 200) =~ "/cs/sites/site/#{site.id}"
     end
 
     test "all segments (personal or site) are stuffed into dataset, with their associated owner_id and owner_name",
@@ -314,7 +314,7 @@ defmodule PlausibleWeb.StatsControllerTest do
     test "shows CRM link to the site", %{conn: conn} do
       site = new_site()
       conn = get(conn, conn |> get("/" <> site.domain) |> redirected_to())
-      assert html_response(conn, 200) =~ "/crm/sites/site/#{site.id}"
+      assert html_response(conn, 200) =~ "/cs/sites/site/#{site.id}"
     end
   end
 
@@ -1331,8 +1331,40 @@ defmodule PlausibleWeb.StatsControllerTest do
 
       conn = get(conn, "/share/test-site.com/?auth=#{link.slug}")
 
-      assert html_response(conn, 200) =~ "Dashboard locked"
+      assert html_response(conn, 200) =~ "Dashboard Locked"
       refute String.contains?(html_response(conn, 200), "Back to my sites")
+    end
+
+    test "shows locked page if shared link is locked due to insufficient team subscription", %{
+      conn: conn
+    } do
+      site = new_site(domain: "test-site.com")
+      link = insert(:shared_link, site: site)
+
+      insert(:starter_subscription, team: site.team)
+
+      conn = get(conn, "/share/test-site.com/?auth=#{link.slug}")
+
+      assert html_response(conn, 200) =~ "Shared Link Unavailable"
+      refute String.contains?(html_response(conn, 200), "Back to my sites")
+    end
+
+    for special_name <- Plausible.Sites.shared_link_special_names() do
+      test "shows dashboard if team subscription insufficient but shared link name is '#{special_name}'",
+           %{conn: conn} do
+        site = new_site(domain: "test-site.com")
+        link = insert(:shared_link, site: site, name: unquote(special_name))
+
+        insert(:starter_subscription, team: site.team)
+
+        html =
+          conn
+          |> get("/share/test-site.com/?auth=#{link.slug}")
+          |> html_response(200)
+
+        assert element_exists?(html, @react_container)
+        refute html =~ "Shared Link Unavailable"
+      end
     end
 
     test "renders 404 not found when no auth parameter supplied", %{conn: conn} do

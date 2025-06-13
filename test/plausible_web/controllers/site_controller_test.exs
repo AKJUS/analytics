@@ -329,7 +329,10 @@ defmodule PlausibleWeb.SiteControllerTest do
         })
 
       assert html = html_response(conn, 200)
-      assert html =~ "This team is limited to 10 sites"
+
+      assert text_of_element(html, ~s/[data-test="limit-exceeded-notice"]/) =~
+               "This account is limited to 10 sites"
+
       refute Repo.get_by(Plausible.Site, domain: "over-limit.example.com")
     end
 
@@ -583,28 +586,6 @@ defmodule PlausibleWeb.SiteControllerTest do
   describe "GET /:domain/settings/people" do
     setup [:create_user, :log_in, :create_site]
 
-    @tag :ee_only
-    test "shows members page with links to CRM for super admin", %{
-      conn: conn,
-      user: user
-    } do
-      site = new_site(owner: user)
-      patch_env(:super_admin_user_ids, [user.id])
-
-      conn = get(conn, "/#{site.domain}/settings/people")
-      resp = html_response(conn, 200)
-
-      assert resp =~ "/crm/auth/user/#{user.id}"
-    end
-
-    test "does not show CRM links to non-super admin user", %{conn: conn, user: user} do
-      site = new_site(owner: user)
-      conn = get(conn, "/#{site.domain}/settings/people")
-      resp = html_response(conn, 200)
-
-      refute resp =~ "/crm/auth/user/#{user.id}"
-    end
-
     test "lists current members", %{conn: conn, user: user} do
       site = new_site(owner: user)
       editor = add_guest(site, role: :editor)
@@ -694,6 +675,36 @@ defmodule PlausibleWeb.SiteControllerTest do
 
       refute resp =~ "A Better Way of Inviting People to a Team"
       refute resp =~ "Team members automatically have access to this site."
+    end
+
+    @tag :ee_only
+    test "does not render team management notice if Teams feature unavailable", %{
+      conn: conn,
+      user: user
+    } do
+      subscribe_to_starter_plan(user)
+
+      site = new_site(owner: user)
+      resp = conn |> get("/#{site.domain}/settings/people") |> html_response(200)
+
+      refute resp =~ "A Better Way of Inviting People"
+    end
+  end
+
+  describe "GET /:domain/settings/visibility" do
+    setup [:create_user, :log_in, :create_site]
+
+    test "does not render shared links with special names", %{conn: conn, site: site} do
+      for special_name <- Plausible.Sites.shared_link_special_names() do
+        insert(:shared_link, name: special_name, site: site)
+
+        html =
+          conn
+          |> get("/#{site.domain}/settings/visibility")
+          |> html_response(200)
+
+        refute text_of_element(html, "#shared-links-table") =~ special_name
+      end
     end
   end
 
@@ -1620,6 +1631,39 @@ defmodule PlausibleWeb.SiteControllerTest do
       refute is_nil(link.password_hash)
       assert link.name == "New name"
     end
+
+    test "fails to create when subscription plan doesn't support the shared links feature", %{
+      conn: conn,
+      user: user,
+      site: site
+    } do
+      subscribe_to_starter_plan(user)
+
+      conn =
+        post(conn, "/sites/#{site.domain}/shared-links", %{
+          "shared_link" => %{"name" => "Something"}
+        })
+
+      assert redirected_to(conn, 302) == Routes.site_path(conn, :settings_visibility, site.domain)
+
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) =~
+               "Your current subscription plan does not include Shared Links"
+
+      refute Repo.exists?(Plausible.Site.SharedLink)
+    end
+
+    for special_name <- Plausible.Sites.shared_link_special_names() do
+      test "fails to create with the special '#{special_name}' name intended for Plugins API",
+           %{conn: conn, site: site} do
+        conn =
+          post(conn, "/sites/#{site.domain}/shared-links", %{
+            "shared_link" => %{"name" => unquote(special_name)}
+          })
+
+        assert html_response(conn, 200) =~ "This name is reserved. Please choose another one"
+        refute Repo.exists?(Plausible.Site.SharedLink)
+      end
+    end
   end
 
   describe "GET /sites/:domain/shared-links/edit" do
@@ -1646,6 +1690,19 @@ defmodule PlausibleWeb.SiteControllerTest do
       link = Repo.one(Plausible.Site.SharedLink)
 
       assert link.name == "Updated link name"
+    end
+
+    for special_name <- Plausible.Sites.shared_link_special_names() do
+      test "fails to change link name to #{special_name}", %{conn: conn, site: site} do
+        link = insert(:shared_link, site: site)
+
+        conn =
+          put(conn, "/sites/#{site.domain}/shared-links/#{link.slug}", %{
+            "shared_link" => %{"name" => unquote(special_name)}
+          })
+
+        assert html_response(conn, 200) =~ "This name is reserved. Please choose another one"
+      end
     end
   end
 

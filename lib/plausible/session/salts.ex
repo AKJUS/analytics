@@ -1,6 +1,7 @@
 defmodule Plausible.Session.Salts do
   use GenServer
   use Plausible.Repo
+  require Logger
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: opts[:name] || __MODULE__)
@@ -8,6 +9,8 @@ defmodule Plausible.Session.Salts do
 
   @impl true
   def init(opts) do
+    Process.flag(:trap_exit, true)
+
     name = opts[:name] || __MODULE__
     now = opts[:now] || DateTime.utc_now()
     clean_old_salts(now)
@@ -36,6 +39,7 @@ defmodule Plausible.Session.Salts do
           %{previous: nil, current: new}
       end
 
+    log_state("init", state)
     true = :ets.insert(name, {:state, state})
     {:ok, name}
   end
@@ -55,6 +59,7 @@ defmodule Plausible.Session.Salts do
         previous: current
       }
 
+    log_state("rotated", state)
     true = :ets.insert(name, {:state, state})
     {:reply, :ok, name}
   end
@@ -67,7 +72,7 @@ defmodule Plausible.Session.Salts do
 
   defp generate_and_persist_new_salt(now) do
     salt = :crypto.strong_rand_bytes(16)
-
+    Logger.warning("[salts] generated #{:erlang.phash2(salt)}")
     Repo.insert_all("salts", [%{salt: salt, inserted_at: now}])
     salt
   end
@@ -77,5 +82,18 @@ defmodule Plausible.Session.Salts do
       DateTime.shift(now, hour: -48)
 
     Repo.delete_all(from s in "salts", where: s.inserted_at < ^h48_ago)
+  end
+
+  @impl true
+  def terminate(_reason, name) do
+    log_state("terminating", fetch(name))
+  end
+
+  defp log_state(stage, state) do
+    %{current: current, previous: previous} = state
+
+    Logger.warning(
+      "[salts] stage=#{stage} current=#{:erlang.phash2(current)} previous=#{:erlang.phash2(previous)}"
+    )
   end
 end
