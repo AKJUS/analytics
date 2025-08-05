@@ -149,7 +149,7 @@ test.describe('v1 verifier (basic diagnostics)', () => {
 
   test('proxyLikely is false when every snippet starts with an official plausible.io URL', async ({ page }, { testId }) => {
     const prodScriptLocation = 'https://plausible.io/js/'
-    
+
     mockEventResponseSuccess(page)
 
     // We speed up the test by serving "just some script"
@@ -161,7 +161,7 @@ test.describe('v1 verifier (basic diagnostics)', () => {
         "COMPILE_PLAUSIBLE_LEGACY_VARIANT": true
       }
     }, { returnCode: true })
-    
+
     await page.context().route(`${prodScriptLocation}**`, async (route) => {
       await route.fulfill({
         status: 200,

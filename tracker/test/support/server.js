@@ -30,7 +30,7 @@ export function runLocalFileServer() {
       }
 
       res.type('application/javascript').send(code)
-    }  
+    }
   });
 
   // A test utility - serve an image with an artificial delay

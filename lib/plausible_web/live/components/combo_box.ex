@@ -1,7 +1,7 @@
 defmodule PlausibleWeb.Live.Components.ComboBox do
   @moduledoc """
   Phoenix LiveComponent for a combobox UI element with search and selection
-  functionality. 
+  functionality.
 
   The component allows users to select an option from a list of options,
   which can be searched by typing in the input field.

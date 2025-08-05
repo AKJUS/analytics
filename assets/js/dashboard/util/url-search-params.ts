@@ -211,23 +211,23 @@ function isAlreadyRedirected(searchParams: URLSearchParams) {
   return ['v1', 'v2'].includes(searchParams.get(REDIRECTED_SEARCH_PARAM_NAME)!)
 }
 
-/** 
+/**
   Dashboard state is kept on the URL for people to be able to link to what that they see.
   Because dashboard state is a complex object, in the interest of readable URLs, custom serialization and parsing is in place.
-  
+
   Versions
     * v1: @see v1
-      A custom encoding schema was used for filters, (e.g. "?page=/blog"). 
+      A custom encoding schema was used for filters, (e.g. "?page=/blog").
       This was not flexible enough and diverged from how we represented filters in the code.
-      
+
     * v2: @see v2
-      jsonurl library was used to serialize the state. 
+      jsonurl library was used to serialize the state.
       The links from this solution didn't always auto-sense across all platforms (e.g. Twitter), cutting off too soon and leading users to broken dashboards.
-      
-    * current version: this module. 
+
+    * current version: this module.
       Custom encoding.
-   
-  The purpose of this function is to redirect users from one of the previous versions to the current version, 
+
+  The purpose of this function is to redirect users from one of the previous versions to the current version,
   so previous dashboard links still work.
 */
 export function getRedirectTarget(windowLocation: Location): null | string {

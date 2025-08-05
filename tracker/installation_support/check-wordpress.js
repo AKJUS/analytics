@@ -2,7 +2,7 @@ export const WORDPRESS_PLUGIN_VERSION_SELECTOR = 'meta[name="plausible-analytics
 
 const WORDPRESS_SIGNATURES = [
   'wp-content',
-  'wp-includes', 
+  'wp-includes',
   'wp-json'
 ]
 
@@ -29,7 +29,7 @@ export function checkWordPress(document) {
   if (typeof document === 'object') {
     const wordpressPlugin = scanWpPlugin(document)
     const wordpressLikely = wordpressPlugin || scanWp(document.documentElement?.outerHTML)
-    
+
     return {wordpressPlugin, wordpressLikely}
   }
 

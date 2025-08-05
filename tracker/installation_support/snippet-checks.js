@@ -13,7 +13,7 @@ export async function waitForSnippetsV1(log) {
 
     log(`Final snippet count: head=${snippetCounts.head}; body=${snippetCounts.body}`)
   } else {
-    log('No snippets found after 5 seconds') 
+    log('No snippets found after 5 seconds')
   }
 
   return {
@@ -33,7 +33,7 @@ function getBodySnippets() {
 function countSnippets() {
   const headSnippets = getHeadSnippets()
   const bodySnippets = getBodySnippets()
-  
+
   return {
     head: headSnippets.length,
     body: bodySnippets.length,
@@ -44,7 +44,7 @@ function countSnippets() {
 async function waitForFirstSnippet() {
   const checkFn = (opts) => {
     const snippetsFound = countSnippets()
-    
+
     if (snippetsFound.all > 0 || opts.timeout) {
       return snippetsFound
     }

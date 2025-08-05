@@ -196,7 +196,7 @@ export function switchByMode(cases, mode) {
   switch (mode) {
     case 'web':
       return cases.web
-    case 'esm': 
+    case 'esm':
       return cases.esm
     case 'legacy':
       return cases.legacy
@@ -208,7 +208,7 @@ export function switchByMode(cases, mode) {
 /**
  * This function ensures that the tracker script has attached the event listener before test is run.
  * Note that this race condition happens in the real world as well:
- * Events from features like form submissions, file downloads, outbound links, tagged events 
+ * Events from features like form submissions, file downloads, outbound links, tagged events
  * that work with event handlers registered on the document
  * will not be tracked if the event happens before the tracker script has attached the event listener.
  */

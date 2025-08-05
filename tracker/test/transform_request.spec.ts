@@ -148,7 +148,7 @@ for (const mode of ['web', 'esm']) {
             return { ...payload, p: { requestCount: w.requestCount } }
         }
         }
-  
+
         const { url } = await initializePageDynamically(page, {
           testId,
           scriptConfig: switchByMode(
@@ -162,7 +162,7 @@ for (const mode of ['web', 'esm']) {
           ),
           bodyContent: `<button onclick="window.plausible('Purchase')">Purchase</button>`
         })
-  
+
         await expectPlausibleInAction(page, {
           action: async () => {
             await page.goto(url)
@@ -175,7 +175,7 @@ for (const mode of ['web', 'esm']) {
             { n: 'engagement', p: { requestCount: 1 } }
           ]
         })
-      })  
+      })
 
     test('specificity: "transformRequest" runs after custom properties are determined', async ({
       page

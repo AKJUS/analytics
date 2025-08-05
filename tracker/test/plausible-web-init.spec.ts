@@ -95,7 +95,7 @@ test('if there are two snippets on the page, one wins, no warning is emitted', a
   const config = { ...DEFAULT_CONFIG }
   const snippetAlfa = getConfiguredPlausibleWebSnippet({...config, customProperties: { alfa: true }})
   const initCallAlfa = 'plausible.init({"captureOnLocalhost":true,"customProperties":{"alfa":true}})'
-  expect(snippetAlfa).toEqual(expect.stringContaining(initCallAlfa)) 
+  expect(snippetAlfa).toEqual(expect.stringContaining(initCallAlfa))
   const snippetBeta = getConfiguredPlausibleWebSnippet({...config, customProperties: { beta: true }})
   const initCallBeta = `plausible.init({"captureOnLocalhost":true,"customProperties":{"beta":true}})`
   expect(snippetBeta).toEqual(expect.stringContaining(initCallBeta))
@@ -128,7 +128,7 @@ test('if domain is provided in `init`, it is ignored', async ({ page }, {
   const scriptConfig = getConfiguredPlausibleWebSnippet(config)
   const originalInitCall = 'plausible.init({"captureOnLocalhost":true})'
   // verify that the original snippet is what we expect it to be
-  expect(scriptConfig).toEqual(expect.stringContaining(originalInitCall)) 
+  expect(scriptConfig).toEqual(expect.stringContaining(originalInitCall))
   const initCallWithDomainOverride = `plausible.init({"captureOnLocalhost":true,"domain":"sub.${config.domain}"})`
   const updatedScriptConfig = scriptConfig.replace(
     originalInitCall,

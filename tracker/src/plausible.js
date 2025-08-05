@@ -37,7 +37,7 @@ function init(overrides) {
     window.plausible = track
     window.plausible.init = init
     window.plausible.v = COMPILE_TRACKER_SCRIPT_VERSION
-    
+
     if (COMPILE_PLAUSIBLE_WEB) {
       window.plausible.s = 'web'
     }

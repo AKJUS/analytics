@@ -32,10 +32,10 @@ defmodule PlausibleWeb.HelpScoutView do
                 <li :for={team <- @teams}>
                   <a
                     onclick={"loadContent('/helpscout/show?#{URI.encode_query(
-                    email: @email, 
-                    conversation_id: @conversation_id, 
-                    customer_id: @customer_id, 
-                    team_identifier: team.identifier, 
+                    email: @email,
+                    conversation_id: @conversation_id,
+                    customer_id: @customer_id,
+                    team_identifier: team.identifier,
                     token: @token)}')"}
                     href="#"
                   >
