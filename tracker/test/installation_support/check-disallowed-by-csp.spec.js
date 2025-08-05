@@ -37,4 +37,4 @@ test.describe('checkDisallowedByCSP', () => {
     const headers = {'content-security-policy': "default-src 'self' foo.com; bar.com"}
     expect(checkDisallowedByCSP(headers, HOST_TO_CHECK)).toBe(true)
   })
-}) 
+})

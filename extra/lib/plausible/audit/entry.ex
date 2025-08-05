@@ -1,6 +1,6 @@
 defmodule Plausible.Audit.Entry do
   @moduledoc """
-  Persistent Audit Entry schema 
+  Persistent Audit Entry schema
   """
 
   use Ecto.Schema

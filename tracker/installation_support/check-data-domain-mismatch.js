@@ -6,7 +6,7 @@ export function checkDataDomainMismatch(snippets, expectedDataDomain) {
 
     const multiple = scriptDataDomain.split(',').map(d => d.trim())
     const dataDomainMismatch = !multiple.some((domain) => domain.replace(/^www\./, '') === expectedDataDomain)
-    
+
     return dataDomainMismatch
   })
 }

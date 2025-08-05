@@ -3,7 +3,7 @@ import { runThrottledCheck } from "./run-check"
 export async function plausibleFunctionCheck(log) {
   log('Checking for Plausible function...')
   const plausibleFound = await waitForPlausibleFunction()
-    
+
   if (plausibleFound) {
     log('Plausible function found. Executing test event...')
     const callbackResult = await testPlausibleCallback(log)

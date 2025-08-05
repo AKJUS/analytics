@@ -27,7 +27,7 @@ defmodule Plausible.Repo.Migrations.MakeGoalDisplayNamesUnique do
   def fill_display_names do
     execute """
     UPDATE goals
-    SET display_name = 
+    SET display_name =
       CASE
     WHEN page_path IS NOT NULL THEN 'Visit ' || page_path
     WHEN event_name IS NOT NULL THEN event_name
