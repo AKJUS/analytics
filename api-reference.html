@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-5B3B3491.js"></script>
+    <script src="dist/sidebar_items-E0857AF1.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-PVRIOB7F.js"></script>
 
@@ -922,6 +922,15 @@ outside of the main application supervision tree.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Plausible.DataMigration.PrefixTrackerScriptConfigurationId.html" translate="no">Plausible.DataMigration.PrefixTrackerScriptConfigurationId</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Migration to update tracker script configuration IDs to use the new prefixed format.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Plausible.DataMigration.SiteImports.html" translate="no">Plausible.DataMigration.SiteImports</a>
 
   </div>
@@ -951,6 +960,26 @@ when altering it.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Plausible.DnsLookup.html" translate="no">Plausible.DnsLookup</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Thin wrapper around <a href="https://www.erlang.org/doc/apps/kernel/inet_res.html#lookup/5"><code class="inline">:inet_res.lookup/5</code></a>.
+To use, call <code class="inline">Plausible.DnsLookup.impl().lookup/5</code>,
+this allows for mocking DNS lookups in tests.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.DnsLookupInterface.html" translate="no">Plausible.DnsLookupInterface</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Behaviour module for DNS lookup operations.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Plausible.Ecto.EventName.html" translate="no">Plausible.Ecto.EventName</a>
 
   </div>
@@ -975,6 +1004,24 @@ when altering it.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>Custom column type for nanoid strings</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Ecto.Types.NanoidBase.html" translate="no">Plausible.Ecto.Types.NanoidBase</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Base module for nanoid string types</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Ecto.Types.TrackerScriptNanoid.html" translate="no">Plausible.Ecto.Types.TrackerScriptNanoid</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Custom column type for tracker script configuration nanoid strings with pa- prefix</p></div>
 
 </div>
 <div class="summary-row">
@@ -1402,6 +1449,15 @@ correctly.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Plausible.InstallationSupport.BrowserlessConfig.html" translate="no">Plausible.InstallationSupport.BrowserlessConfig</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Req options for browserless.io requests</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Plausible.InstallationSupport.Check.html" translate="no">Plausible.InstallationSupport.Check</a>
 
   </div>
@@ -1426,6 +1482,16 @@ correctly.</p></div>
 
     <div class="summary-synopsis"><p>Scans the Content Security Policy header to ensure that the Plausible domain is allowed.
 See <a href="Plausible.InstallationSupport.LegacyVerification.Checks.html"><code class="inline">Plausible.InstallationSupport.LegacyVerification.Checks</code></a> for the execution sequence.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.InstallationSupport.Checks.Detection.html" translate="no">Plausible.InstallationSupport.Checks.Detection</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Calls the browserless.io service (local instance can be spawned with <code class="inline">make browserless</code>)
+and runs detector script via the <a href="https://docs.browserless.io/HTTP-APIs/function">function API</a>.</p></div>
 
 </div>
 <div class="summary-row">
@@ -1502,12 +1568,33 @@ is wrapped with some CDN/caching layer.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Plausible.InstallationSupport.Detection.html" translate="no">Plausible.InstallationSupport.Detection</a>
+    <a href="Plausible.InstallationSupport.Checks.Url.html" translate="no">Plausible.InstallationSupport.Checks.Url</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Exposes a perform function which visits the given URL via a Browserless
-/function API call, and in a returns the following diagnostics</p></div>
+    <div class="summary-synopsis"><p>Checks if site domain has an A record.
+If not, checks if prepending <code class="inline">www.</code> helps,
+because we have specifically requested customers to register the domain with <code class="inline">www.</code> prefix.
+If not, skips all further checks.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.InstallationSupport.Detection.Checks.html" translate="no">Plausible.InstallationSupport.Detection.Checks</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Checks that are performed pre-installation, providing recommended installation
+methods and whether v1 is used on the site.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.InstallationSupport.Detection.Diagnostics.html" translate="no">Plausible.InstallationSupport.Detection.Diagnostics</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Module responsible for translating diagnostics to user-friendly errors and recommendations.</p></div>
 
 </div>
 <div class="summary-row">
@@ -3066,30 +3153,6 @@ on the basis of authenticated session token.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="PlausibleWeb.Components.Billing.LegacyPlanBenefits.html" translate="no">PlausibleWeb.Components.Billing.LegacyPlanBenefits</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>[DEPRECATED] This file is essentially a copy of
-<a href="PlausibleWeb.Components.Billing.PlanBenefits.html"><code class="inline">PlausibleWeb.Components.Billing.PlanBenefits</code></a> with the
-intent of keeping the old behaviour in place for the users without
-the <code class="inline">starter_tier</code> feature flag enabled.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="PlausibleWeb.Components.Billing.LegacyPlanBox.html" translate="no">PlausibleWeb.Components.Billing.LegacyPlanBox</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>[DEPRECATED] This file is essentially a copy of
-<code class="inline">PlausibleWeb.Components.Billing.PlanBox</code> with the
-intent of keeping the old behaviour in place for the users without
-the <code class="inline">starter_tier</code> feature flag enabled.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="PlausibleWeb.Components.Billing.PlanBenefits.html" translate="no">PlausibleWeb.Components.Billing.PlanBenefits</a>
 
   </div>
@@ -3516,6 +3579,15 @@ data contains a valid token.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="PlausibleWeb.Live.ChangeDomainV2.Form.html" translate="no">PlausibleWeb.Live.ChangeDomainV2.Form</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Live component for the change domain form</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="PlausibleWeb.Live.ChoosePlan.html" translate="no">PlausibleWeb.Live.ChoosePlan</a>
 
   </div>
@@ -3743,18 +3815,6 @@ and the number of steps they have.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>Instruction forms and components for InstallationV2 module</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="PlausibleWeb.Live.LegacyChoosePlan.html" translate="no">PlausibleWeb.Live.LegacyChoosePlan</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>[DEPRECATED] This file is essentially a copy of
-<a href="PlausibleWeb.Live.ChoosePlan.html"><code class="inline">PlausibleWeb.Live.ChoosePlan</code></a> with the
-intent of keeping the old behaviour in place for the users without
-the <code class="inline">starter_tier</code> feature flag enabled.</p></div>
 
 </div>
 <div class="summary-row">
@@ -4663,7 +4723,7 @@ Plugins API Tokens lookup.</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Cache for tracker script(s) for self-hosted Plausible instances.</p></div>
+    <div class="summary-synopsis"><p>Cache for tracker script.</p></div>
 
 </div>
 <div class="summary-row">
