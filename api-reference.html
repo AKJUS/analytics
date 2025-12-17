@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-EEFDCA36.js"></script>
+    <script src="dist/sidebar_items-CC9B67B8.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-PVRIOB7F.js"></script>
 
@@ -1469,7 +1469,7 @@ are uniformly either buffered in batches (to Clickhouse) or dropped
 
   </div>
 
-    <div class="summary-synopsis"><p>Sets up telemetry for remote calls to persistor via <a href="https://hexdocs.pm/finch/0.19.0/Finch.Telemetry.html"><code class="inline">Finch.Telemetry</code></a> events.</p></div>
+    <div class="summary-synopsis"><p>Sets up telemetry for remote calls to persistor via <a href="https://hexdocs.pm/finch/0.20.0/Finch.Telemetry.html"><code class="inline">Finch.Telemetry</code></a> events.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2272,6 +2272,27 @@ with one of the following policy markers</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Plausible.Stats.DashboardQueryParser.html" translate="no">Plausible.Stats.DashboardQueryParser</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Parses a dashboard query string into <code class="inline">%ParsedQueryParams{}</code>. Note that
+<code class="inline">metrics</code> and <code class="inline">dimensions</code> do not exist at this step yet, and are expected
+to be filled in by each specific report.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Stats.DashboardQuerySerializer.html" translate="no">Plausible.Stats.DashboardQuerySerializer</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Takes a <code class="inline">%ParsedQueryParams{}</code> struct and turns it into a query
+string.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Plausible.Stats.DateTimeRange.html" translate="no">Plausible.Stats.DateTimeRange</a>
 
   </div>
@@ -2400,7 +2421,7 @@ for dimensions, filters and metrics used in import table queries</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Deprecated module. See QueryParser for list of valid dimensions</p></div>
+    <div class="summary-synopsis"><p>Deprecated module. See ApiQueryParser for list of valid dimensions</p></div>
 
 </div>
 <div class="summary-row">
@@ -3184,6 +3205,24 @@ benefits for Growth, Business, and Enterprise plans.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="PlausibleWeb.Components.Dashboard.Base.html" translate="no">PlausibleWeb.Components.Dashboard.Base</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Common components for dasbhaord.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PlausibleWeb.Components.Dashboard.Tile.html" translate="no">PlausibleWeb.Components.Dashboard.Tile</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Components for rendering dashboard tile contents.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="PlausibleWeb.Components.FirstDashboardLaunchBanner.html" translate="no">PlausibleWeb.Components.FirstDashboardLaunchBanner</a>
 
   </div>
@@ -3745,6 +3784,24 @@ and diagnostics.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>User coordinator LiveView for Customer Support interface.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PlausibleWeb.Live.Dashboard.html" translate="no">PlausibleWeb.Live.Dashboard</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>LiveView for site dashboard.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PlausibleWeb.Live.Dashboard.Pages.html" translate="no">PlausibleWeb.Live.Dashboard.Pages</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Pages breakdown component.</p></div>
 
 </div>
 <div class="summary-row">
