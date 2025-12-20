@@ -227,7 +227,9 @@ Plausible.Site.ImportedData.html
 Plausible.Site.MonthlyReport.html
 Plausible.Site.Removal.html
 Plausible.Site.SharedLink.html
+Plausible.Site.TrackerScriptCache.html
 Plausible.Site.TrackerScriptConfiguration.html
+Plausible.Site.TrackerScriptIdCache.html
 Plausible.Site.TrafficChangeNotification.html
 Plausible.Site.UserPreference.html
 Plausible.Site.WeeklyReport.html
@@ -479,6 +481,7 @@ PlausibleWeb.Plugins.API.Schemas.Goal.CreateRequest.Pageview.html
 PlausibleWeb.Plugins.API.Schemas.Goal.CreateRequest.Revenue.html
 PlausibleWeb.Plugins.API.Schemas.Goal.CreateRequest.html
 PlausibleWeb.Plugins.API.Schemas.Goal.CustomEvent.html
+PlausibleWeb.Plugins.API.Schemas.Goal.CustomProps.html
 PlausibleWeb.Plugins.API.Schemas.Goal.DeleteBulkRequest.html
 PlausibleWeb.Plugins.API.Schemas.Goal.ListResponse.html
 PlausibleWeb.Plugins.API.Schemas.Goal.Pageview.html
@@ -535,7 +538,6 @@ PlausibleWeb.Team.Notice.html
 PlausibleWeb.TestController.html
 PlausibleWeb.Tracker.html
 PlausibleWeb.TrackerPlug.html
-PlausibleWeb.TrackerScriptCache.html
 PlausibleWeb.TwoFactor.Session.html
 PlausibleWeb.UnsubscribeController.html
 PlausibleWeb.UnsubscribeView.html
@@ -562,8 +564,8 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-2275CB15.js
-dist/sidebar_items-CC9B67B8.js
+dist/search_data-B031C623.js
+dist/sidebar_items-B7853586.js
 index.html
 readme.html
 search.html
