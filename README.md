@@ -75,7 +75,7 @@ Interested in self-hosting Plausible CE on your server? Take a look at our [Plau
 Plausible CE is a community supported project and there are no guarantees that you will get support from the creators of Plausible to troubleshoot your self-hosting issues. There is a [community supported forum](https://github.com/plausible/analytics/discussions/categories/self-hosted-support) where you can ask for help.
 
 Our only source of funding is our premium, managed service for running Plausible in the cloud.
- 
+
 ## Technology
 
 Plausible Analytics is a standard Elixir/Phoenix application backed by a PostgreSQL database for general data and a Clickhouse

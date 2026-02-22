@@ -6,8 +6,8 @@ defmodule Plausible.Auth.SSO.Domain do
 
   Each pending domain should be periodically checked for
   ownership verification by testing for presence of TXT record, meta tag
-  or URL. The moment whichever of them succeeds first, 
-  the domain is marked as verified with method and timestamp 
+  or URL. The moment whichever of them succeeds first,
+  the domain is marked as verified with method and timestamp
   recorded.
   """
 

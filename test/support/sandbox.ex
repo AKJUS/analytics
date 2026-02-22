@@ -1,6 +1,6 @@
 defmodule Plausible.Test.Support.Sandbox do
   @moduledoc """
-  Prevent background processes from interfering with tests 
+  Prevent background processes from interfering with tests
   (e.g. exiting before properly returning the connection) by allowing them to access sandbox
   """
   def allow_salts_process do
