@@ -29,7 +29,7 @@ defmodule Plausible.Repo.Migrations.BackfillAcceptTrafficUntilForUsersMissingNot
       WHERE user_id = u.id
     )
     AND NOT EXISTS (
-      select 1 from subscriptions 
+      select 1 from subscriptions
       WHERE status = 'active'
       AND
       user_id = u.id

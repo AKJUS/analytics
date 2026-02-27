@@ -78,7 +78,7 @@ sso:
 
 	@sleep 2
 
-	@echo "Use the following IdP configuration:" 
+	@echo "Use the following IdP configuration:"
 	@echo ""
 	@echo "Sign-in URL: http://localhost:8080/simplesaml/saml2/idp/SSOService.php"
 	@echo ""
@@ -92,7 +92,7 @@ sso:
 	@echo "- user@plausible.test / plausible"
 	@echo "- user1@plausible.test / plausible"
 	@echo "- user2@plausible.test / plausible"
-	
+
 sso-stop:
 	docker stop idp
 	docker remove idp
@@ -112,4 +112,4 @@ loadtest-server:
 loadtest-client:
 	@echo "Set your limits for file descriptors/ephemeral ports high... Test begins shortly"
 	@sleep 5
-	k6 run test/load/script.js  
+	k6 run test/load/script.js

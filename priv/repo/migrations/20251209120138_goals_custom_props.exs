@@ -4,7 +4,7 @@ defmodule Plausible.Repo.Migrations.GoalsCustomProps do
   @disable_ddl_transaction true
   @disable_migration_lock true
 
-  # adds custom_props to goals, but also updates unique constraints to guard for either display name 
+  # adds custom_props to goals, but also updates unique constraints to guard for either display name
   # or broadly speaking "goal configuration"
 
   def change do

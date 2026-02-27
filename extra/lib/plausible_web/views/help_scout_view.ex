@@ -45,10 +45,10 @@ defmodule PlausibleWeb.HelpScoutView do
                   <a
                     class="text-blue-600 dark:text-blue-500 hover:underline"
                     onclick={"loadContent('/helpscout/show?#{URI.encode_query(
-                    email: @email, 
-                    conversation_id: @conversation_id, 
-                    customer_id: @customer_id, 
-                    team_identifier: team.identifier, 
+                    email: @email,
+                    conversation_id: @conversation_id,
+                    customer_id: @customer_id,
+                    team_identifier: team.identifier,
                     token: @token)}')"}
                     href="#"
                   >
