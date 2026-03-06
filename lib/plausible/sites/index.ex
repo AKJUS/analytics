@@ -24,7 +24,7 @@ defmodule Plausible.Sites.Index do
 
   defmodule Page do
     @moduledoc """
-    A single page of results, drop-in replacement for Scrivener.Page 
+    A single page of results, drop-in replacement for Scrivener.Page
     """
 
     @type t() :: %__MODULE__{

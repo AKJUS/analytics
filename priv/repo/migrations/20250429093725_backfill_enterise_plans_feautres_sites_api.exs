@@ -8,7 +8,7 @@ defmodule Plausible.Repo.Migrations.BackfillEnterisePlansFeautresSitesApi do
               'stats_api' = ANY(features) AND
               EXISTS (
                 SELECT 1 FROM team_memberships AS tm
-                WHERE 
+                WHERE
                   tm.team_id = ep.team_id AND
                   EXISTS(
                     SELECT 1 FROM api_keys ak
