@@ -323,7 +323,7 @@ defmodule Plausible.HelpScout do
 
   defp get_emails_with_customer_mapping(customer_id) do
     # We want to explicitly reject customer emails from HS which
-    # are in one of excluded domains. That's why we fetch 
+    # are in one of excluded domains. That's why we fetch
     # emails from HS first before checking the mapping.
     case fetch_customer_emails(customer_id) do
       {:ok, emails} ->

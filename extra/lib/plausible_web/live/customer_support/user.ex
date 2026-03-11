@@ -2,7 +2,7 @@ defmodule PlausibleWeb.Live.CustomerSupport.User do
   @moduledoc """
   User coordinator LiveView for Customer Support interface.
 
-  Manages tab-based navigation and delegates rendering to specialized 
+  Manages tab-based navigation and delegates rendering to specialized
   components: Overview and API Keys.
   """
   use PlausibleWeb.CustomerSupport.Live

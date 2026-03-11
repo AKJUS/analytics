@@ -1,7 +1,7 @@
 defmodule Plausible.Plugs.SSOTeamAccess do
   @moduledoc """
   Plug ensuring user is permitted to access the team
-  if it has SSO setup with Force SSO policy.  
+  if it has SSO setup with Force SSO policy.
   """
 
   use Plausible
