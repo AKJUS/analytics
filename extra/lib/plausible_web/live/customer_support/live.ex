@@ -4,7 +4,7 @@ defmodule PlausibleWeb.CustomerSupport.Live do
 
   Provides:
   - Standard mount/3 and handle_info/2 implementations
-  - Tab navigation components and routing utilities  
+  - Tab navigation components and routing utilities
   - Common aliases and imports for Customer Support LiveViews
   - Convenience API for flashes and redirects
   """
