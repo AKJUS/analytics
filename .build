@@ -4,6 +4,7 @@ Mix.Tasks.CreateFreeSubscription.html
 Mix.Tasks.CreatePaddleProdPlans.html
 Mix.Tasks.CreatePaddleSandboxPlans.html
 Mix.Tasks.DownloadCountryDatabase.html
+Mix.Tasks.GenerateCountriesMeta.html
 Mix.Tasks.GenerateReferrerFavicons.html
 Mix.Tasks.PullSandboxSubscription.html
 Mix.Tasks.SendPageview.html
@@ -30,6 +31,8 @@ Plausible.Auth.SSO.Integration.html
 Plausible.Auth.SSO.SAMLConfig.html
 Plausible.Auth.SSO.html
 Plausible.Auth.TOTP.EncryptedBinary.html
+Plausible.Auth.TOTP.FallbackEncryptedBinary.html
+Plausible.Auth.TOTP.FallbackVault.html
 Plausible.Auth.TOTP.RecoveryCode.html
 Plausible.Auth.TOTP.Vault.html
 Plausible.Auth.TOTP.html
@@ -86,12 +89,14 @@ Plausible.DataCase.html
 Plausible.DataMigration.AcquisitionChannel.html
 Plausible.DataMigration.BackfillTeams.html
 Plausible.DataMigration.BackfillTeamsHourlyRequestLimit.html
+Plausible.DataMigration.BackfillTotpSecretFallback.html
 Plausible.DataMigration.BackfillTrackerScriptConfiguration.TrackerScriptConfigurationSnapshot.html
 Plausible.DataMigration.BackfillTrackerScriptConfiguration.html
 Plausible.DataMigration.CleanUpDemoSiteReferrerSource.html
 Plausible.DataMigration.ClickhouseRepo.html
 Plausible.DataMigration.LocationsSync.html
 Plausible.DataMigration.NumericIDs.html
+Plausible.DataMigration.OverwriteTotpSecret.html
 Plausible.DataMigration.PopulateEventSessionColumns.html
 Plausible.DataMigration.PostgresRepo.html
 Plausible.DataMigration.PrefixTrackerScriptConfigurationId.html
@@ -457,8 +462,11 @@ PlausibleWeb.Live.Shields.IPAddresses.html
 PlausibleWeb.Live.Shields.IPRules.html
 PlausibleWeb.Live.Shields.PageRules.html
 PlausibleWeb.Live.Shields.Pages.html
+PlausibleWeb.Live.SiteTransferSettings.Form.html
+PlausibleWeb.Live.SiteTransferSettings.html
 PlausibleWeb.Live.Sites.html
 PlausibleWeb.Live.SubscriptionSettings.html
+PlausibleWeb.Live.SuperAdminLiveAuth.html
 PlausibleWeb.Live.TeamManagement.html
 PlausibleWeb.Live.TeamSetup.html
 PlausibleWeb.Live.Verification.html
@@ -525,7 +533,6 @@ PlausibleWeb.Plugs.SecureEmbedHeaders.html
 PlausibleWeb.Plugs.SecureSSO.html
 PlausibleWeb.Plugs.UserSessionTouch.html
 PlausibleWeb.RemoteIP.html
-PlausibleWeb.RequireAccountPlug.html
 PlausibleWeb.RequireLoggedOutPlug.html
 PlausibleWeb.Router.html
 PlausibleWeb.SSO.FakeSAMLAdapter.html
@@ -569,8 +576,8 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-F08B67B5.js
-dist/sidebar_items-6F026B8B.js
+dist/search_data-60E6A95E.js
+dist/sidebar_items-7F691A4B.js
 index.html
 readme.html
 search.html
