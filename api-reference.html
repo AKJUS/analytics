@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-C625C182.js"></script>
+    <script src="dist/sidebar_items-50DCA619.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-PVRIOB7F.js"></script>
 
@@ -168,6 +168,24 @@ Pages
   </div>
 
     <div class="summary-synopsis"><p>Build-related macros</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Annotations.html" translate="no">Plausible.Annotations</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Module for accessing Annotations.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Annotations.Annotation.html" translate="no">Plausible.Annotations.Annotation</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Schema for annotations. Annotations are notes attached to a point on the graph.</p></div>
 
 </div>
 <div class="summary-row">
@@ -1116,6 +1134,8 @@ They are distinguished by event name.</p></div>
 
   </div>
 
+    <div class="summary-synopsis"><p>See <a href="https://ecto.hexdocs.pm/test-factories.html">https://ecto.hexdocs.pm/test-factories.html</a></p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -1263,20 +1283,6 @@ creating and deleting funnel definitions.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>HTTP Client built on top of Finch.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Plausible.HTTPClient.Interface.html" translate="no">Plausible.HTTPClient.Interface</a>
-
-  </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Plausible.HTTPClient.Non200Error.html" translate="no">Plausible.HTTPClient.Non200Error</a>
-
-  </div>
 
 </div>
 <div class="summary-row">
@@ -1523,7 +1529,7 @@ are uniformly either buffered in batches (to Clickhouse) or dropped
 
   </div>
 
-    <div class="summary-synopsis"><p>Sets up telemetry for remote calls to persistor via <a href="https://hexdocs.pm/finch/0.20.0/Finch.Telemetry.html"><code class="inline">Finch.Telemetry</code></a> events.</p></div>
+    <div class="summary-synopsis"><p>Sets up telemetry for remote calls to persistor via <a href="https://hexdocs.pm/finch/0.23.0/Finch.Telemetry.html"><code class="inline">Finch.Telemetry</code></a> events.</p></div>
 
 </div>
 <div class="summary-row">
@@ -1948,6 +1954,9 @@ clean-up process to act as a rate limiter.</p></div>
 
   </div>
 
+    <div class="summary-synopsis"><p>Utility functions used by release scripts for routine tasks, 
+like migrations. </p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -2040,6 +2049,8 @@ clean-up process to act as a rate limiter.</p></div>
     <a href="Plausible.Session.CacheStore.html" translate="no">Plausible.Session.CacheStore</a>
 
   </div>
+
+    <div class="summary-synopsis"><p>Session management on the basis of incoming events.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2302,7 +2313,7 @@ user, supporting alphanumeric or traffic-based sorting over the last 24 hours.</
 
   </div>
 
-    <div class="summary-synopsis"><p>A single page of results, drop-in replacement for Scrivener.Page </p></div>
+    <div class="summary-synopsis"><p>A single page of results, drop-in replacement for Scrivener.Page</p></div>
 
 </div>
 <div class="summary-row">
@@ -2997,13 +3008,6 @@ re-record the cassettes anyway).</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Plausible.TestUtils.html" translate="no">Plausible.TestUtils</a>
-
-  </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="Plausible.Themes.html" translate="no">Plausible.Themes</a>
 
   </div>
@@ -3162,6 +3166,8 @@ To avoid blocking the queue, a timeout of 15 minutes is enforced.</p></div>
 
   </div>
 
+    <div class="summary-synopsis"><p>Job scheduling dispatch of weekly and monthly email reports.</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -3183,12 +3189,16 @@ To avoid blocking the queue, a timeout of 15 minutes is enforced.</p></div>
 
   </div>
 
+    <div class="summary-synopsis"><p>Job sending site setup emails.</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="Plausible.Workers.SendTrialNotifications.html" translate="no">Plausible.Workers.SendTrialNotifications</a>
 
   </div>
+
+    <div class="summary-synopsis"><p>Job sending trial end notification emails.</p></div>
 
 </div>
 <div class="summary-row">
@@ -3208,13 +3218,6 @@ sent us engagement data in the past.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>Oban service sending out traffic drop/spike notifications</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="PlausibleWeb.html" translate="no">PlausibleWeb</a>
-
-  </div>
 
 </div>
 <div class="summary-row">
@@ -3245,6 +3248,15 @@ sent us engagement data in the past.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>Helper functions for API controllers.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="PlausibleWeb.Api.Internal.AnnotationsController.html" translate="no">PlausibleWeb.Api.Internal.AnnotationsController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Internal API controller for annotations.</p></div>
 
 </div>
 <div class="summary-row">
@@ -4826,6 +4838,17 @@ Plugins API Tokens lookup.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="PlausibleWeb.Plugs.FeatureFlagCheckPlug.html" translate="no">PlausibleWeb.Plugs.FeatureFlagCheckPlug</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>plug(PlausibleWeb.Plugs.FeatureFlagCheckPlug, [:flag_foo, :flag_bar])
+to halt any API connections with 404 where conn.assigns.current_user or conn.assigns.site
+don't have both feature flags true.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="PlausibleWeb.Plugs.InternalStatsApiVersion.html" translate="no">PlausibleWeb.Plugs.InternalStatsApiVersion</a>
 
   </div>
@@ -5090,13 +5113,6 @@ is changed with that action.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mix.Tasks.CreateFreeSubscription.html" translate="no">mix create_free_subscription</a>
-
-  </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="Mix.Tasks.CreatePaddleProdPlans.html" translate="no">mix create_paddle_prod_plans</a>
 
   </div>
@@ -5145,13 +5161,6 @@ The dashboard uses it for two things.
 First, to render country flags the same way as the BE does.
 Secondly, to map visitors by country to the country shapes in the world map. This is needed
 because country shapes are identified in the geography dataset only with their alpha3 code.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Mix.Tasks.GenerateReferrerFavicons.html" translate="no">mix generate_referrer_favicons</a>
-
-  </div>
 
 </div>
 <div class="summary-row">
