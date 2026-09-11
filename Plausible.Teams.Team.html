@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-1EBF74D7.js"></script>
+    <script src="dist/sidebar_items-D8C6FCF4.js"></script>
     <script src="docs_config.js"></script>
     <script async src="dist/html-PVRIOB7F.js"></script>
 
@@ -227,6 +227,17 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#suggested_name/1" data-no-tooltip translate="no">suggested_name(user_name)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds the team name suggested for a user, shortening the user's name as
+needed, so that the result stays within the name length limit.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#trial_accept_traffic_until_offset_days/0" data-no-tooltip translate="no">trial_accept_traffic_until_offset_days()</a>
 
       </div>
@@ -288,6 +299,7 @@ Pages
   sites: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   sso_integration: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   subscription: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  team_deletion_schedule: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   team_invitations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   team_memberships: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   trial_expiry_date: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
@@ -325,7 +337,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">changeset(team \\ %__MODULE__{}, attrs \\ %{}, today \\ Date.utc_today())</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L99" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L139" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -345,7 +357,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">crm_changeset(team, params)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L87" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L126" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -365,7 +377,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">end_trial(team)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L132" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L174" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -387,7 +399,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">name_changeset(team, attrs \\ %{})</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L108" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L149" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -409,7 +421,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">setup_changeset(team, now \\ NaiveDateTime.utc_now(:second))</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L115" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L157" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -431,7 +443,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">start_trial(team, today \\ Date.utc_today())</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L123" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L165" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -451,7 +463,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">subscription_accept_traffic_until_offset_days()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L160" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L219" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
@@ -463,6 +475,28 @@ Pages
 
   </section>
 </section>
+<section class="detail" id="suggested_name/1">
+
+  <div class="detail-header">
+    <a href="#suggested_name/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <h1 class="signature" translate="no">suggested_name(user_name)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L104" class="icon-action" rel="help" aria-label="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Builds the team name suggested for a user, shortening the user's name as
+needed, so that the result stays within the name length limit.</p><p>Falls back to a generic name when the user's name would make the suggestion
+invalid, so that the suggestion is always safe to persist.</p>
+  </section>
+</section>
 <section class="detail" id="trial_accept_traffic_until_offset_days/0">
 
   <div class="detail-header">
@@ -471,7 +505,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">trial_accept_traffic_until_offset_days()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L158" class="icon-action" rel="help" aria-label="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/teams/team.ex#L217" class="icon-action" rel="help" aria-label="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
      </a>
 
