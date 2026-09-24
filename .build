@@ -91,6 +91,7 @@ Plausible.CustomerSupport.TrialProspect.html
 Plausible.CustomerSupport.TrialProspects.html
 Plausible.DataCase.html
 Plausible.DataMigration.AcquisitionChannel.html
+Plausible.DataMigration.BackfillFunnelType.html
 Plausible.DataMigration.BackfillTeams.html
 Plausible.DataMigration.BackfillTeamsHourlyRequestLimit.html
 Plausible.DataMigration.BackfillTotpSecretFallback.html
@@ -117,6 +118,8 @@ Plausible.Ecto.Types.CompiledRegex.html
 Plausible.Ecto.Types.Nanoid.html
 Plausible.Ecto.Types.NanoidBase.html
 Plausible.Ecto.Types.TrackerScriptNanoid.html
+Plausible.EmailSuppression.html
+Plausible.EmailSuppressions.html
 Plausible.Event.SystemEvents.html
 Plausible.Exports.html
 Plausible.Factory.html
@@ -189,8 +192,12 @@ Plausible.License.html
 Plausible.Mailer.html
 Plausible.MigrationUtils.html
 Plausible.OAuth.AuthorizationCode.html
+Plausible.OAuth.CIMD.html
 Plausible.OAuth.Grant.html
+Plausible.OAuth.PKCE.html
 Plausible.OAuth.ProtectedResources.html
+Plausible.OAuth.Token.html
+Plausible.OAuth.html
 Plausible.OpenTelemetry.BeamMetrics.html
 Plausible.OpenTelemetry.Logger.html
 Plausible.Pagination.html
@@ -207,6 +214,7 @@ Plausible.Plugs.AuthorizeTeamAccess.html
 Plausible.Plugs.HandleExpiredSession.html
 Plausible.Plugs.RestrictUserType.html
 Plausible.Plugs.SSOTeamAccess.html
+Plausible.Postmark.html
 Plausible.PromEx.Buckets.html
 Plausible.PromEx.Plugins.PlausibleMetrics.html
 Plausible.PromEx.StripedPeep.html
@@ -372,6 +380,7 @@ PlausibleWeb.Api.Internal.AnnotationsController.html
 PlausibleWeb.Api.Internal.SegmentsController.html
 PlausibleWeb.Api.InternalController.html
 PlausibleWeb.Api.PaddleController.html
+PlausibleWeb.Api.PostmarkController.html
 PlausibleWeb.Api.StatsController.html
 PlausibleWeb.Api.SystemController.html
 PlausibleWeb.AuthController.html
@@ -583,8 +592,9 @@ PlausibleWeb.TwoFactor.Session.html
 PlausibleWeb.UnsubscribeController.html
 PlausibleWeb.UnsubscribeView.html
 PlausibleWeb.UserAuth.html
+PlausibleWeb.VerifiedRoutes.html
 api-reference.html
-assets/logo.png
+assets/logo.svg
 contributing.html
 dist/handlebars.runtime-NWIB6V2M.js
 dist/handlebars.templates-K7URE6B4.js
@@ -603,8 +613,8 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-8FF9E59A.js
-dist/sidebar_items-D8C6FCF4.js
+dist/search_data-A2AF85F7.js
+dist/sidebar_items-1261A45C.js
 index.html
 readme.html
 search.html
