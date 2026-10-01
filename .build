@@ -404,6 +404,7 @@ PlausibleWeb.Controllers.API.Revenue.html
 PlausibleWeb.CustomerSupport.Components.Layout.html
 PlausibleWeb.CustomerSupport.Components.Search.html
 PlausibleWeb.CustomerSupport.Components.SearchResult.html
+PlausibleWeb.CustomerSupport.Components.SuppressionWarning.html
 PlausibleWeb.CustomerSupport.Live.html
 PlausibleWeb.CustomerSupport.Site.Components.Overview.html
 PlausibleWeb.CustomerSupport.Site.Components.People.html
@@ -453,6 +454,7 @@ PlausibleWeb.Live.Components.Pagination.html
 PlausibleWeb.Live.Components.Team.html
 PlausibleWeb.Live.Components.VerificationBanner.html
 PlausibleWeb.Live.Components.Visitors.html
+PlausibleWeb.Live.CustomerSupport.EmailSuppressions.html
 PlausibleWeb.Live.CustomerSupport.Site.html
 PlausibleWeb.Live.CustomerSupport.Team.html
 PlausibleWeb.Live.CustomerSupport.TrialProspects.html
@@ -613,8 +615,8 @@ dist/lato-latin-ext-300-normal-VPGGJKJL.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-A2AF85F7.js
-dist/sidebar_items-1261A45C.js
+dist/search_data-E63F017B.js
+dist/sidebar_items-000A1A27.js
 index.html
 readme.html
 search.html
